@@ -23,7 +23,7 @@
         <!-- Navigation Bar -->
         <nav class="navbar">
             <div class="logo"><a href="#">CHUG</a></div>
-            <div class="menu-icon" id="menu-icon">
+            <div class="menu-icon" id="menu-icon" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -39,6 +39,9 @@
             <a href="#buy" class="buy-button desktop-only">Buy on Kyberswap</a>
         </nav>
     </header>
+
+    <!-- Overlay for Mobile Menu -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Main Content -->
     <main>
@@ -106,20 +109,48 @@
 
     <!-- Scripts -->
     <script>
-        const menuIcon = document.getElementById('menu-icon');
-        const navLinks = document.getElementById('nav-links');
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.getElementById('menu-icon');
+            const navLinks = document.getElementById('nav-links');
+            const overlay = document.getElementById('overlay');
 
-        menuIcon.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuIcon.classList.toggle('active');
-        });
+            const toggleMenu = () => {
+                const isActive = navLinks.classList.toggle('active');
+                menuIcon.classList.toggle('active');
+                overlay.classList.toggle('active');
+                // Update aria attributes
+                menuIcon.setAttribute('aria-expanded', isActive);
+            };
 
-        // Close menu when a link is clicked
-        const navItems = document.querySelectorAll('.nav-links li a');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuIcon.classList.remove('active');
+            menuIcon.addEventListener('click', toggleMenu);
+            menuIcon.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleMenu();
+                }
+            });
+
+            // Close menu when a link is clicked
+            const navItems = document.querySelectorAll('.nav-links li a');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuIcon.classList.remove('active');
+                        overlay.classList.remove('active');
+                        menuIcon.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            overlay.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuIcon.classList.remove('active');
+                    overlay.classList.remove('active');
+                    menuIcon.setAttribute('aria-expanded', 'false');
+                }
             });
         });
     </script>
