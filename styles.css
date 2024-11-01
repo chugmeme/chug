@@ -88,6 +88,9 @@ img {
     color: var(--accent-color);
 }
 
+/* Removed styles related to .buy-button.desktop-only and .buy-button.mobile-only */
+
+/* buy-button class is still used for "Buy $CHUG Now" button in Hero */
 .buy-button {
     background: var(--secondary-color);
     color: var(--text-color);
@@ -298,13 +301,7 @@ footer {
         display: flex;
     }
 
-    .buy-button.desktop-only {
-        display: none;
-    }
-
-    .mobile-only {
-        display: inline-block;
-    }
+    /* Removed display properties for desktop-only and mobile-only buttons */
 }
 
 /* Adjustments for Smaller Screens */
@@ -329,4 +326,3 @@ footer {
         font-size: 1em;
     }
 }
-
