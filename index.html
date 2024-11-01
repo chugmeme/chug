@@ -1,90 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Tags for Responsiveness and SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHUG - Crypto Icon</title>
+    <title>CHUG - Embrace the Momentum</title>
+    <meta name="description" content="CHUG is not just a token, it's a way of life for those who never have enough. Join us and embrace the momentum!">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts for better typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="logo">CHUG</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#tokenomics">Tokenomics</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="https://t.me/CHUG" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a></li>
-            <li><a href="https://twitter.com/CHUG" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
-        </ul>
-        <button class="buy-button">Buy on Kyberswap</button>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-    </nav>
+    <!-- Header -->
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo"><a href="#">CHUG</a></div>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">&#9776;</label>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#community">Community</a></li>
+            </ul>
+            <a href="#buy" class="buy-button">Buy on Kyberswap</a>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="content">
-            <h2>Introducing</h2>
-            <h1>CHUG</h1>
-            <p>Let's CHUG together</p>
-            <p>CHUG is a way of life. CHUG is for those who never have enough!</p>
-            <button class="buy-button">Buy $CHUG</button>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="content">
+                <h2>Introducing</h2>
+                <h1>CHUG</h1>
+                <p>CHUG is not just a token; it's a way of life for those who never have enough!</p>
+                <a href="#buy" class="buy-button">Buy $CHUG Now</a>
+            </div>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2>About CHUG</h2>
-            <p>CHUG is a revolutionary cryptocurrency designed for community-driven growth and sustainability. Join us in shaping the future of digital finance.</p>
-        </div>
-    </section>
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <h2>About CHUG</h2>
+                <p>CHUG is more than a cryptocurrency; it's a movement for those driven by passion and desire. We are building a community of like-minded individuals who believe in the relentless pursuit of success. Join us as we CHUG towards a brighter future.</p>
+            </div>
+        </section>
 
-    <!-- Tokenomics Section -->
-    <section id="tokenomics" class="section">
-        <div class="container">
-            <h2>Tokenomics</h2>
-            <p>Discover the strategic distribution and utility of $CHUG tokens, ensuring long-term value and engagement for our community.</p>
-        </div>
-    </section>
+        <!-- Tokenomics Section -->
+        <section class="tokenomics" id="tokenomics">
+            <div class="container">
+                <h2>Tokenomics</h2>
+                <!-- Tokenomics content would go here -->
+            </div>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit" class="buy-button">Send Message</button>
-            </form>
-        </div>
-    </section>
+        <!-- Roadmap Section -->
+        <section class="roadmap" id="roadmap">
+            <div class="container">
+                <h2>Roadmap</h2>
+                <!-- Roadmap content would go here -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <!-- Contact form or details would go here -->
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="community" id="community">
+            <div class="container">
+                <h2>Join Our Community</h2>
+                <!-- Links to Telegram, Twitter, etc. -->
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 CHUG. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2023 CHUG. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#terms">Terms of Service</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+            </ul>
+        </div>
     </footer>
 
-    <!-- JavaScript for Hamburger Menu -->
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('nav-active');
-            hamburger.classList.toggle('toggle');
-        });
-    </script>
+    <!-- Scripts (if needed) -->
+    <!-- <script src="script.js"></script> -->
 
 </body>
 </html>
