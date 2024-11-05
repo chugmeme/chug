@@ -18,41 +18,18 @@
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <!-- Navigation Bar -->
-        <nav class="navbar">
-            <div class="logo"><a href="#">CHUG</a></div>
-            <div class="menu-icon" id="menu-icon" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#tokenomics">Tokenomics</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#community">Community</a></li>
-                <!-- Removed the mobile-only "Buy on KyberSwap" button -->
-            </ul>
-            <!-- Removed the desktop-only "Buy on KyberSwap" button -->
-        </nav>
-    </header>
-
-    <!-- Overlay for Mobile Menu -->
-    <div class="overlay" id="overlay"></div>
-
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="content">
+                <!-- Mascot Image -->
+                <img src="https://i.imgur.com/jdorFWb.png" alt="CHUG Mascot" class="mascot">
                 <h2>Introducing</h2>
                 <h1>CHUG</h1>
                 <p>CHUG is not just a token; it's a way of life for those who never have enough!</p>
-                <a href="#buy" class="buy-button">Buy $CHUG Now</a>
-                <!-- Removed Twitter and Telegram buttons -->
+                <a href="#tokenomics" class="buy-button">Buy $CHUG Now</a>
+                <!-- Updated the link to point to Tokenomics section -->
             </div>
         </section>
 
@@ -68,23 +45,16 @@
         <section class="tokenomics" id="tokenomics">
             <div class="container">
                 <h2>Tokenomics</h2>
-                <!-- Tokenomics content would go here -->
+                <p>70% circulation supply, 15% community activities, 10% airdrops, 5% dev expenses</p>
+                <p>Airdrop to x, y, z communities!</p>
             </div>
         </section>
 
-        <!-- Roadmap Section -->
-        <section class="roadmap" id="roadmap">
+        <!-- Mission Section -->
+        <section class="mission" id="mission">
             <div class="container">
-                <h2>Roadmap</h2>
-                <!-- Roadmap content would go here -->
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact" id="contact">
-            <div class="container">
-                <h2>Contact Us</h2>
-                <!-- Contact form or details would go here -->
+                <h2>Mission</h2>
+                <p>Placeholder for Mission details. Outline the goals, vision, and long-term objectives of the CHUG project.</p>
             </div>
         </section>
 
@@ -92,7 +62,7 @@
         <section class="community" id="community">
             <div class="container">
                 <h2>Join Our Community</h2>
-                <!-- Links to Telegram, Twitter, etc. -->
+                <p>Join us on Telegram and X.com</p>
             </div>
         </section>
     </main>
@@ -108,54 +78,5 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuIcon = document.getElementById('menu-icon');
-            const navLinks = document.getElementById('nav-links');
-            const overlay = document.getElementById('overlay');
-
-            const toggleMenu = () => {
-                const isActive = navLinks.classList.toggle('active');
-                menuIcon.classList.toggle('active');
-                overlay.classList.toggle('active');
-                // Update aria attributes
-                menuIcon.setAttribute('aria-expanded', isActive);
-            };
-
-            menuIcon.addEventListener('click', toggleMenu);
-            menuIcon.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggleMenu();
-                }
-            });
-
-            // Close menu when a link is clicked
-            const navItems = document.querySelectorAll('.nav-links li a');
-            navItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                        menuIcon.classList.remove('active');
-                        overlay.classList.remove('active');
-                        menuIcon.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            });
-
-            // Close menu when clicking outside
-            overlay.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    menuIcon.classList.remove('active');
-                    overlay.classList.remove('active');
-                    menuIcon.setAttribute('aria-expanded', 'false');
-                }
-            });
-        });
-    </script>
-
 </body>
 </html>
-
