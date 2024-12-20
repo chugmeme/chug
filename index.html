@@ -31,7 +31,8 @@
         </div>
         <div class="hero-content">
             <div class="mascot-wrap">
-                <video class="mascot" autoplay loop muted playsinline preload="auto" poster="/api/placeholder/320/320">
+                <!-- Added webkit-playsinline for iOS, and ensured background is transparent -->
+                <video class="mascot" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="/api/placeholder/320/320" style="background:transparent;">
                     <source src="mascot.webm" type="video/webm">
                     <img src="/api/placeholder/320/320" alt="CHUG Mascot">
                 </video>

@@ -145,12 +145,12 @@ body {
 }
 
 .mascot {
-    width:360px; 
-    height:360px;
+    width:350px; 
+    height:350px;
     border-radius:50%;
     box-shadow:0 0 20px rgba(0,0,0,0.05);
-    object-fit: contain;
-    background: var(--color-#ffffff00);
+    object-fit: cover;
+    background:transparent; /* Make bubble transparent */
 }
 
 .hero-title {
@@ -286,8 +286,8 @@ footer {
     }
 
     .mascot {
-        width:220px; 
-        height:220px;
+        width:250px; 
+        height:250px;
     }
 
     section h2 {
