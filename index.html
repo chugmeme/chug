@@ -197,9 +197,9 @@
         const vp9Support = testVideo.canPlayType('video/webm; codecs="vp9"');
 
         if (hevcAlphaSupport === 'probably' || hevcAlphaSupport === 'maybe') {
-            player.src = 'mascot.mov';
+            player.src = 'okchug.mov';
         } else if (vp9Support === 'probably' || vp9Support === 'maybe') {
-            player.src = 'mascot9.webm';
+            player.src = 'okchug9.webm';
         } else {
             console.warn('Neither HEVC alpha nor VP9 alpha is supported by this browser.');
         }
