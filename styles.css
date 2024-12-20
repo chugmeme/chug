@@ -45,6 +45,23 @@ body {
     z-index:-2;
 }
 
+/* Header / Logo */
+.site-header {
+    width:100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align:center;
+    background:var(--color-light);
+    position:relative;
+    z-index:1000;
+}
+
+.site-logo {
+    font-family: var(--font-display);
+    font-size:2.5rem;
+    color:var(--color-dark);
+    letter-spacing:-0.02em;
+}
+
 /* Floating Orb Navigation */
 .floating-orb {
     position:fixed;
@@ -135,12 +152,9 @@ body {
 }
 
 .mascot-wrap {
-    margin-bottom: var(--spacing-lg);
-    transition: transform var(--transition);
-    display: inline-block;
-    /* Add these properties to ensure proper background handling */
-    background-color: transparent;
-    -webkit-transform: translateZ(0);
+    margin-bottom:var(--spacing-lg);
+    transition:transform var(--transition);
+    display:inline-block;
 }
 
 .mascot-wrap:hover {
@@ -148,29 +162,12 @@ body {
 }
 
 .mascot {
-    width: 350px; 
-    height: 350px;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    width:350px; 
+    height:350px;
+    border-radius:50%;
+    box-shadow:0 0 20px rgba(0,0,0,0.05);
     object-fit: cover;
-    /* Add these properties for iOS compatibility */
-    background-color: transparent !important;
-    -webkit-background-color: transparent !important;
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    /* Ensure video is on GPU */
-    transform: translate3d(0,0,0);
-    will-change: transform;
-}
-
-.hero-title {
-    font-family:var(--font-display);
-    font-size:3.5rem;
-    font-weight:400;
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-dark);
-    letter-spacing:-0.02em;
+    background:none transparent !important;
 }
 
 .hero p {
@@ -288,8 +285,8 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width:768px) {
-    .hero-title {
-        font-size:2.5rem;
+    .site-logo {
+        font-size:2rem;
     }
 
     .hero p {
@@ -311,8 +308,8 @@ footer {
 }
 
 @media (max-width:480px) {
-    .hero-title {
-        font-size:2rem;
+    .site-logo {
+        font-size:1.5rem;
     }
 
     .cta-button {

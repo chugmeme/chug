@@ -14,6 +14,10 @@
     <!-- Infinite background gradient -->
     <div class="infinite-bg"></div>
     
+    <header class="site-header">
+        <h1 class="site-logo">CHUG</h1>
+    </header>
+
     <!-- Floating Orb Navigation -->
     <div class="floating-orb">
         <div class="orb" aria-label="Open navigation menu" role="button" tabindex="0"></div>
@@ -31,19 +35,12 @@
         </div>
         <div class="hero-content">
             <div class="mascot-wrap">
-                <!-- Added webkit-playsinline for iOS, and ensured background is transparent -->
-                <video class="mascot" 
-                    autoplay loop muted playsinline 
-                    webkit-playsinline 
-                    x5-playsinline
-                    preload="auto" 
-                    poster="/api/placeholder/320/320"
-                    style="background: transparent !important;">
+                <!-- Transparent background for iOS -->
+                <video class="mascot" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="/api/placeholder/320/320" style="background:none transparent;">
                     <source src="mascot.webm" type="video/webm">
                     <img src="/api/placeholder/320/320" alt="CHUG Mascot">
-            </video>
+                </video>
             </div>
-            <h1 class="hero-title">CHUG</h1>
             <p>At the *end of all horizons*, where <em>infinite abundance</em> meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives to bestow <em>everything</em> upon you. Prosperity flows unbound—yours to <strong>CHUG</strong> in endless delight. This final, perfected tapestry is life, art, and wealth, all yours by cosmic right.</p>
             <a href="#tokenomics" class="cta-button">Immerse & CHUG</a>
         </div>
