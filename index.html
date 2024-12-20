@@ -30,13 +30,18 @@
             <canvas id="cosmosCanvas"></canvas>
         </div>
         <div class="hero-content">
-            <h1 class="hero-heading"><span class="intro-line">Hello is</span><br>CHUG</h1>
+            <h1 class="hero-heading"><span class="intro-line">Hi is</span><br>CHUG</h1>
             <div class="mascot-wrap">
                 <video id="mascotVideo" class="mascot" autoplay loop muted playsinline preload="auto" poster="fallback.png">
+                    <!-- First source: HEVC + Alpha in MOV for Safari iOS -->
                     <source src="mascot.mov" type="video/quicktime">
-                    <source src="mascot.webm" type="video/webm">
+                    
+                    <!-- Second source: VP9 + Alpha in WebM as fallback for Chrome iOS and others -->
+                    <source src="mascot9.webm" type="video/webm">
+                
+                
                     Your browser does not support the video tag.
-                </video>
+                </video>                
             </div>
             <p>At the <em>end of all horizons</em>, where <em>infinite abundance</em> meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives to bestow <em>everything</em> upon you. Prosperity flows unbound—yours to <strong>CHUG</strong> in endless delight.</p>
             <a href="#tokenomics" class="cta-button">Immerse &amp; CHUG</a>
@@ -189,7 +194,7 @@
         if (supportsHEVCAlpha()) {
             player.src = 'mascot.mov'; 
         } else {
-            player.src = 'mascot.webm'; 
+            player.src = 'mascot9.webm'; 
         }
 
         // Tokenomics Card Click Handling
