@@ -3,7 +3,6 @@
     --color-light: #EDFFFC;
     --color-aqua: #97FDE4;
     --color-teal: #34998C;
-    --color-deep-green: #072723;
 
     --font-primary: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-size-base: 16px;
@@ -37,11 +36,11 @@ body {
     overflow-x:hidden;
 }
 
-/* Hyperliquid background effect */
-.hyperliquid-bg {
+/* Infinite background gradient */
+.infinite-bg {
     position:fixed;
     top:0; left:0; right:0; bottom:0;
-    background: linear-gradient(135deg, var(--color-light) 0%, #ffffff 100%);
+    background: linear-gradient(145deg, var(--color-light) 0%, #ffffff 100%);
     z-index:-2;
 }
 
@@ -63,10 +62,11 @@ body {
     background:var(--color-aqua);
     box-shadow:0 0 10px rgba(0,0,0,0.1);
     transition:transform var(--transition);
+    cursor:pointer;
 }
 
-.floating-orb:hover .orb {
-    transform:scale(1.1);
+.orb:focus {
+    outline: 2px solid var(--color-teal);
 }
 
 .nav-hints {
@@ -99,9 +99,11 @@ body {
     transition:transform var(--transition), box-shadow var(--transition);
 }
 
-.nav-hints a:hover {
+.nav-hints a:hover,
+.nav-hints a:focus {
     transform:translateY(-2px);
     box-shadow:0 5px 10px rgba(0,0,0,0.1);
+    outline:none;
 }
 
 /* Hero */
@@ -140,11 +142,13 @@ body {
     transform:scale(1.04);
 }
 
+/* Increase the mascot dimension by 27% from original 220px => ~280px */
 .mascot {
-    width:220px;
-    height:220px;
+    width:280px;
+    height:280px;
     border-radius:50%;
     box-shadow:0 0 20px rgba(0,0,0,0.05);
+    object-fit:cover;
 }
 
 .hero h1 {
@@ -182,9 +186,11 @@ body {
     position:relative;
 }
 
-.cta-button:hover {
+.cta-button:hover,
+.cta-button:focus {
     transform:translateY(-2px) scale(1.03);
     box-shadow:0 15px 30px rgba(0,0,0,0.1);
+    outline:none;
 }
 
 /* Sections */
@@ -230,7 +236,8 @@ section p {
     border:1px solid rgba(0,0,0,0.05);
 }
 
-.tokenomics-item:hover {
+.tokenomics-item:hover,
+.tokenomics-item:focus-within {
     transform:translateY(-4px);
     box-shadow:0 10px 20px rgba(0,0,0,0.1);
     background: var(--color-aqua);
@@ -276,8 +283,8 @@ footer {
     }
 
     .mascot {
-        width:180px;
-        height:180px;
+        width:280px;
+        height:280px;
     }
 
     section h2 {
@@ -292,11 +299,6 @@ footer {
 @media (max-width:480px) {
     .hero h1 {
         font-size:2rem;
-    }
-
-    .mascot {
-        width:150px;
-        height:150px;
     }
 
     .cta-button {

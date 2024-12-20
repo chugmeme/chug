@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>CHUG - Hyperliquid Transcendence</title>
-    <meta name="description" content="CHUG - The final synthesis of infinite refinement, clarity, and prosperity.">
+    <title>CHUG - Infinite Prosperity</title>
+    <meta name="description" content="CHUG - The ultimate stage of cosmic prosperity, where everything flows to you as you deserve.">
     <link rel="icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="hyperliquid-bg"></div>
+    <!-- Hyperliquid, cosmic background -->
+    <div class="infinite-bg"></div>
     
-    <!-- Floating Orb Navigation -->
+    <!-- Floating Orb Navigation (Click/Tap Toggle) -->
     <div class="floating-orb">
-        <div class="orb"></div>
-        <div class="nav-hints">
+        <div class="orb" role="button" tabindex="0" aria-label="Toggle navigation"></div>
+        <div class="nav-hints" aria-hidden="true">
             <a href="#about">About</a>
             <a href="#tokenomics">Tokenomics</a>
             <a href="#mission">Mission</a>
@@ -35,38 +36,38 @@
                 </video>
             </div>
             <h1>CHUG</h1>
-            <p>In this ultimate sphere, where divine architecture meets hyperliquid grace, we flow beyond all known boundaries. Market, art, technology, culture: now one gentle current, guiding prosperity and understanding.</p>
-            <a href="#tokenomics" class="cta-button">Flow Onward</a>
+            <p>At the end of all horizons, where infinite abundance meets eternal happiness, CHUG arrives to bestow everything upon you. Prosperity flows unbound—yours to CHUG in endless delight. This final, perfected tapestry is life, art, and wealth, all yours by cosmic right.</p>
+            <a href="#tokenomics" class="cta-button">Immerse & CHUG</a>
         </div>
     </section>
 
     <section id="about">
         <div class="content-container">
-            <h2>Purity of Purpose</h2>
-            <p>Freed from bars and borders, the essence of CHUG emerges as a crystalline stream of influence. Each era, each culture, each vision now flows together, forming a perfect, gentle river of potential.</p>
+            <h2>Pure Integration</h2>
+            <p>In this final form, all cultural streams—art, innovation, humor, wisdom, technology—meld seamlessly. CHUG distills countless eras and civilizations into a serene reservoir of infinite giving, where every drop is yours.</p>
         </div>
     </section>
 
     <section id="tokenomics">
         <div class="content-container">
             <h2>Tokenomics</h2>
-            <p>Like water finding its level, our distributions settle into pure balance. Each segment, a droplet contributing to a tranquil reservoir of collective prosperity.</p>
+            <p>These allocations are but gentle waves in an ocean of prosperity, ensuring that liquidity and abundance forever replenish. Each percentage is a promise that everyone drinks freely from this wellspring.</p>
             <div class="tokenomics-grid">
-                <div class="tokenomics-item">
+                <div class="tokenomics-item" tabindex="0">
                     <h3>70%</h3>
-                    <p>Continuous Circulation</p>
+                    <p>Infinite Circulation</p>
                 </div>
-                <div class="tokenomics-item">
+                <div class="tokenomics-item" tabindex="0">
                     <h3>15%</h3>
-                    <p>Harmonic Community</p>
+                    <p>Communal Flourish</p>
                 </div>
-                <div class="tokenomics-item">
+                <div class="tokenomics-item" tabindex="0">
                     <h3>10%</h3>
-                    <p>Gentle Airdrops</p>
+                    <p>Celestial Gifts</p>
                 </div>
-                <div class="tokenomics-item">
+                <div class="tokenomics-item" tabindex="0">
                     <h3>5%</h3>
-                    <p>Everlasting Development</p>
+                    <p>Eternal Growth</p>
                 </div>
             </div>
         </div>
@@ -75,31 +76,31 @@
     <section id="mission">
         <div class="content-container">
             <h2>Our Mission</h2>
-            <p>To unite the infinite threads of existence into a serene ocean of creation. All past and future innovations, all cultural expressions, wash together in a timeless confluence.</p>
+            <p>To shepherd all forms of value—material, cultural, intellectual—into a single radiant stream. With CHUG guiding the flow, every participant becomes a beneficiary of cosmic harmony and wealth.</p>
         </div>
     </section>
 
     <section id="community">
         <div class="content-container">
-            <h2>Join the Eternal Current</h2>
-            <p>Be carried gently into a realm beyond measure. Together, our energies form a tide of peace, understanding, and abundance. Dive in, and become one with the flow.</p>
-            <a href="#" class="cta-button community-cta">Immerse</a>
+            <h2>Join the Eternal Flow</h2>
+            <p>Step forward and CHUG deeply from the spring of limitless prosperity. Let the currents of abundance, culture, and joy fill your life. This is your birthright; embrace it.</p>
+            <a href="#" class="cta-button community-cta">CHUG Now</a>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 CHUG. Flowing through unknown cosmos, nurturing infinite harmony.</p>
+            <p>&copy; 2024 CHUG. Flowing beyond boundaries, granting all that is and ever will be—forever yours.</p>
         </div>
     </footer>
 
     <script>
-        // Gentle cosmic particle animation
+        // Subtle cosmic particle animation
         const canvas = document.getElementById('cosmosCanvas');
         const ctx = canvas.getContext('2d');
         let w = canvas.width = window.innerWidth;
         let h = canvas.height = window.innerHeight;
-
+        
         const particles = [];
         for(let i = 0; i < 120; i++){
             particles.push({
@@ -111,7 +112,7 @@
                 hue: Math.random()*360
             });
         }
-
+        
         function animate(){
             ctx.clearRect(0,0,w,h);
             ctx.globalCompositeOperation='lighter';
@@ -129,20 +130,48 @@
             requestAnimationFrame(animate);
         }
         animate();
-
+        
         window.addEventListener('resize',()=>{
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
         });
-
-        // Orb navigation interactions
-        const orb = document.querySelector('.floating-orb');
+        
+        // Orb navigation interactions (improved for mobile and desktop)
+        const orb = document.querySelector('.orb');
         const navHints = document.querySelector('.nav-hints');
-        orb.addEventListener('mouseenter',()=> {
-            navHints.classList.add('show');
+
+        function toggleNav() {
+            const isOpen = navHints.classList.contains('show');
+            if (isOpen) {
+                navHints.classList.remove('show');
+                navHints.setAttribute('aria-hidden', 'true');
+            } else {
+                navHints.classList.add('show');
+                navHints.setAttribute('aria-hidden', 'false');
+            }
+        }
+
+        orb.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleNav();
         });
-        orb.addEventListener('mouseleave',()=>{
-            navHints.classList.remove('show');
+
+        // Close nav if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!navHints.contains(e.target) && !orb.contains(e.target)) {
+                if (navHints.classList.contains('show')) {
+                    navHints.classList.remove('show');
+                    navHints.setAttribute('aria-hidden', 'true');
+                }
+            }
+        });
+
+        // Keyboard accessibility
+        orb.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleNav();
+            }
         });
     </script>
 </body>
