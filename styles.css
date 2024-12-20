@@ -35,14 +35,45 @@ body {
     color:var(--color-dark);
     background:var(--color-light);
     overflow-x:hidden;
+    position: relative;
 }
 
-/* Infinite background gradient */
+/* Infinite background with subtle aurora */
 .infinite-bg {
     position:fixed;
     top:0; left:0; right:0; bottom:0;
     background: linear-gradient(145deg, var(--color-light) 0%, #ffffff 100%);
     z-index:-2;
+    overflow:hidden;
+}
+
+/* Aurora-like effect */
+.infinite-bg::before {
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+    background: radial-gradient(
+        circle at 30% 50%, 
+        rgba(151,253,228,0.2),
+        transparent 50%
+    ),
+    radial-gradient(
+        circle at 70% 50%,
+        rgba(52,153,140,0.15),
+        transparent 60%
+    );
+    mix-blend-mode: screen;
+    animation: aurora 10s infinite alternate ease-in-out;
+    pointer-events:none;
+}
+
+@keyframes aurora {
+    0% {
+        transform: translate(0,0);
+    }
+    100% {
+        transform: translate(0,-5%);
+    }
 }
 
 /* Floating Orb Navigation */
@@ -138,6 +169,17 @@ body {
     margin-bottom:var(--spacing-lg);
     transition:transform var(--transition);
     display:inline-block;
+    /* Magical Glow for Transparent Bubble */
+    border-radius:50%;
+    padding:10px;
+    background:transparent;
+    box-shadow:0 0 30px rgba(151,253,228,0.3), 0 0 50px rgba(52,153,140,0.2);
+    animation: bubbleGlow 5s infinite alternate ease-in-out;
+}
+
+@keyframes bubbleGlow {
+    0% { box-shadow:0 0 30px rgba(151,253,228,0.3), 0 0 50px rgba(52,153,140,0.2);}
+    100% { box-shadow:0 0 40px rgba(151,253,228,0.4), 0 0 70px rgba(52,153,140,0.3); }
 }
 
 .mascot-wrap:hover {
@@ -148,9 +190,8 @@ body {
     width:294px; 
     height:294px;
     border-radius:50%;
-    box-shadow:0 0 20px rgba(0,0,0,0.05);
     object-fit: cover;
-    background: var(--color-light);
+    background: transparent; /* now fully transparent bubble */
 }
 
 .hero-title {
