@@ -145,12 +145,12 @@ body {
 }
 
 .mascot {
-    width:294px; 
-    height:294px;
+    width:360px; 
+    height:360px;
     border-radius:50%;
     box-shadow:0 0 20px rgba(0,0,0,0.05);
-    object-fit: cover;
-    background: var(--color-light);
+    object-fit: contain;
+    background: var(--color-#ffffff00);
 }
 
 .hero-title {
