@@ -45,23 +45,6 @@ body {
     z-index:-2;
 }
 
-/* Header / Logo */
-.site-header {
-    width:100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    text-align:center;
-    background:var(--color-light);
-    position:relative;
-    z-index:1000;
-}
-
-.site-logo {
-    font-family: var(--font-display);
-    font-size:2.5rem;
-    color:var(--color-dark);
-    letter-spacing:-0.02em;
-}
-
 /* Floating Orb Navigation */
 .floating-orb {
     position:fixed;
@@ -162,12 +145,21 @@ body {
 }
 
 .mascot {
-    width:350px; 
-    height:350px;
+    width:294px; 
+    height:294px;
     border-radius:50%;
     box-shadow:0 0 20px rgba(0,0,0,0.05);
     object-fit: cover;
-    background:none transparent !important;
+    background: var(--color-light);
+}
+
+.hero-title {
+    font-family:var(--font-display);
+    font-size:3.5rem;
+    font-weight:400;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-dark);
+    letter-spacing:-0.02em;
 }
 
 .hero p {
@@ -285,8 +277,8 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width:768px) {
-    .site-logo {
-        font-size:2rem;
+    .hero-title {
+        font-size:2.5rem;
     }
 
     .hero p {
@@ -294,8 +286,8 @@ footer {
     }
 
     .mascot {
-        width:250px; 
-        height:250px;
+        width:220px; 
+        height:220px;
     }
 
     section h2 {
@@ -308,8 +300,8 @@ footer {
 }
 
 @media (max-width:480px) {
-    .site-logo {
-        font-size:1.5rem;
+    .hero-title {
+        font-size:2rem;
     }
 
     .cta-button {
