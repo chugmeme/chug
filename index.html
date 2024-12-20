@@ -33,8 +33,8 @@
             <h1 class="hero-heading"><span class="intro-line">This is</span><br>CHUG</h1>
             <div class="mascot-wrap">
                 <video id="mascotVideo" class="mascot" autoplay loop muted playsinline preload="auto" poster="fallback.png">
-                    <source src="mascot.mov" type="video/quicktime">
-                    <source src="mascot.webm" type="video/webm">
+                    <source src="mascot1.mov" type="video/quicktime">
+                    <source src="mascot1.webm" type="video/webm">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -187,9 +187,9 @@
 
         const player = document.getElementById('mascotVideo');
         if (supportsHEVCAlpha()) {
-            player.src = 'mascot.mov'; 
+            player.src = 'mascot1.mov'; 
         } else {
-            player.src = 'mascot.webm'; 
+            player.src = 'mascot1.webm'; 
         }
 
         // Tokenomics Card Click Handling
