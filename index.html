@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>CHUG - Infinite Prosperity</title>
-    <meta name="description" content="CHUG - The ultimate stage of cosmic prosperity.">
+    <meta name="description" content="CHUG - A cosmic oasis of infinite prosperity, inviting you to immerse and CHUG it all.">
     <link rel="icon" href="favicon.ico">
     <!-- Fonts: Fredoka One for CHUG title, Plus Jakarta Sans for other text -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,26 +30,29 @@
             <canvas id="cosmosCanvas"></canvas>
         </div>
         <div class="hero-content">
-            <h1 class="hero-title">CHUG</h1>
+            <div class="hero-title-wrap">
+                <h1 class="hero-title">This is</h1>
+                <h1 class="hero-subtitle">CHUG</h1>
+            </div>
             <div class="mascot-wrap">
                 <video id="mascotVideo" class="mascot" autoplay loop muted playsinline preload="auto" poster="fallback.png"></video>
             </div>
-            <p>At the *end of all horizons*, where <em>infinite abundance</em> meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives to bestow <em>everything</em> upon you. Prosperity flows unbound—yours to <strong>CHUG</strong> in endless delight.</p>
-            <a href="#tokenomics" class="cta-button">Immerse & CHUG</a>
+            <p>At the *final horizon* of creation, where <em>infinite abundance</em> merges with <strong>eternal happiness</strong>, <strong>CHUG</strong> welcomes you. Prosperity flows without limit—<em>yours to CHUG</em> in boundless delight.</p>
+            <a href="#tokenomics" class="cta-button">Immerse &amp; CHUG</a>
         </div>
     </section>
 
     <section id="about">
         <div class="content-container">
             <h2>Pure Integration</h2>
-            <p>In this final form, all cultural streams—art, innovation, humor, wisdom, technology—meld seamlessly. <em>CHUG</em> distills countless eras and civilizations into a serene reservoir of infinite giving, where every drop is <strong>yours</strong>.</p>
+            <p>In this refined existence, all cultures, arts, and innovations <em>harmonize</em> seamlessly. <strong>CHUG</strong> distills countless epochs into a tranquil reservoir of giving, ensuring every drop is <em>yours</em> to savor.</p>
         </div>
     </section>
 
     <section id="tokenomics">
         <div class="content-container">
             <h2>Tokenomics</h2>
-            <p>Like gentle waves in an ocean of prosperity, these allocations ensure that <em>liquidity</em> and <strong>abundance</strong> forever replenish. Each percentage is a quiet promise that everyone drinks freely from this wellspring.</p>
+            <p>Like gentle currents in a serene lagoon, these allocations ensure <em>liquidity</em> and <strong>abundance</strong> forever. Each percentage is a silent pledge that everyone drinks freely from this eternal spring.</p>
             <div class="tokenomics-grid">
                 <div class="tokenomics-item">
                     <h3>70%</h3>
@@ -74,48 +77,45 @@
     <section id="mission">
         <div class="content-container">
             <h2>Our Mission</h2>
-            <p>To unite all forms of value—material, cultural, intellectual—into a single, radiant stream. With <strong>CHUG</strong> guiding the flow, every participant becomes a beneficiary of cosmic harmony and <em>wealth</em>.</p>
+            <p>To unite every form of value—material, cultural, intellectual—into one radiant flow. Guided by <strong>CHUG</strong>, each participant partakes in cosmic harmony and *unending wealth*.</p>
         </div>
     </section>
 
     <section id="community">
         <div class="content-container">
             <h2>Join the Eternal Flow</h2>
-            <p>Step forward and <em>CHUG</em> deeply from the spring of limitless prosperity. Let the currents of abundance, culture, and joy fill your life. This is your birthright; embrace it.</p>
+            <p>Step forth and *CHUG* deeply from this fountain of endless prosperity. Let its currents of joy and culture carry you. This is your inheritance; let it fill your being.</p>
             <a href="#" class="cta-button community-cta">CHUG Now</a>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 <strong>CHUG</strong>. Flowing beyond boundaries, granting all that is and ever will be—forever <em>yours</em>.</p>
+            <p>&copy; 2024 <strong>CHUG</strong>. Flowing beyond boundaries, granting all that is and ever shall be—forever <em>yours</em>.</p>
         </div>
     </footer>
 
     <script>
-        // Particle animation: adjust to use aqua/teal palette, bigger variation in size and movement
         const canvas = document.getElementById('cosmosCanvas');
         const ctx = canvas.getContext('2d');
         let w = canvas.width = window.innerWidth;
         let h = canvas.height = window.innerHeight;
 
-        // Choose colors from a palette close to aqua/teal
-        const palette = [
-            'hsla(168,94%,85%,0.5)', // aqua-like (from #97FDE4)
-            'hsla(171,47%,46%,0.5)', // teal-like (from #34998C)
-            'hsla(180,100%,95%,0.5)', // very light aqua
-            'hsla(160,60%,75%,0.5)'  // a soft green-teal
+        const paletteColors = [
+            'rgba(151,253,228,0.7)',
+            'rgba(52,153,140,0.7)',
+            'rgba(237,255,252,0.7)'
         ];
 
         const particles = [];
-        for(let i = 0; i < 140; i++){
+        for(let i = 0; i < 120; i++){
             particles.push({
                 x: Math.random()*w,
                 y: Math.random()*h,
-                vx: (Math.random()-0.5)*0.5, // slightly more movement
+                vx: (Math.random()-0.5)*0.5,
                 vy: (Math.random()-0.5)*0.5,
-                r: Math.random()*3+1.5, // sizes slightly bigger
-                color: palette[Math.floor(Math.random()*palette.length)]
+                r: Math.random()*3+1,
+                color: paletteColors[Math.floor(Math.random()*paletteColors.length)]
             });
         }
 
@@ -175,7 +175,7 @@
             });
         });
 
-        // Detect HEVC with alpha for Safari
+        // Video format detection and fallback to ensure no black background on iOS Chrome
         function supportsHEVCAlpha() {
             const ua = navigator.userAgent.toLowerCase();
             const hasMediaCapabilities = !!(navigator.mediaCapabilities && navigator.mediaCapabilities.decodingInfo);
@@ -185,11 +185,18 @@
 
         const player = document.getElementById('mascotVideo');
 
-        // If Safari supports HEVC alpha, use .mov, else .webm
+        // Attempt to detect VP9 alpha support:
+        // A simple heuristic: modern desktop Chrome/Firefox often support VP9 alpha. 
+        // For iOS Chrome (no alpha support), we fallback to a non-alpha video.
+        const canPlayVP9 = player.canPlayType('video/webm; codecs="vp9"') === 'probably';
+
         if (supportsHEVCAlpha()) {
-            player.src = 'mascot.mov'; 
+            player.src = 'mascot.mov';
+        } else if (canPlayVP9) {
+            player.src = 'mascot.webm';
         } else {
-            player.src = 'mascot.webm'; 
+            // Fallback video with a background that matches the page (no alpha)
+            player.src = 'mascot-fallback.mp4';
         }
     </script>
 </body>

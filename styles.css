@@ -31,49 +31,39 @@ html {
 
 body {
     font-family: var(--font-primary);
-    line-height:1.5;
+    line-height:1.6;
     color:var(--color-dark);
     background:var(--color-light);
     overflow-x:hidden;
-    position: relative;
+    position:relative;
 }
 
-/* Infinite background with subtle aurora */
+/* Optimized Aura: simpler, less resource-intensive */
+body::after {
+    content:"";
+    position:fixed;
+    top:0; left:0; right:0; bottom:0;
+    pointer-events:none;
+    z-index:-1;
+    background: radial-gradient(50% 50%, rgba(151,253,228,0.15) 0%, rgba(52,153,140,0.05) 35%, transparent 100%);
+    animation: auramove 12s ease-in-out infinite alternate;
+}
+
+@keyframes auramove {
+    0% {
+        background: radial-gradient(50% 50%, rgba(151,253,228,0.15) 0%, rgba(52,153,140,0.05) 35%, transparent 100%);
+    }
+    100% {
+        background: radial-gradient(60% 40%, rgba(52,153,140,0.15) 0%, rgba(151,253,228,0.05) 35%, transparent 100%);
+    }
+}
+
+/* Infinite background gradient */
 .infinite-bg {
     position:fixed;
     top:0; left:0; right:0; bottom:0;
     background: linear-gradient(145deg, var(--color-light) 0%, #ffffff 100%);
     z-index:-2;
-    overflow:hidden;
-}
-
-/* Aurora-like effect */
-.infinite-bg::before {
-    content:"";
-    position:absolute;
-    top:0;left:0;right:0;bottom:0;
-    background: radial-gradient(
-        circle at 30% 50%, 
-        rgba(151,253,228,0.2),
-        transparent 50%
-    ),
-    radial-gradient(
-        circle at 70% 50%,
-        rgba(52,153,140,0.15),
-        transparent 60%
-    );
-    mix-blend-mode: screen;
-    animation: aurora 10s infinite alternate ease-in-out;
-    pointer-events:none;
-}
-
-@keyframes aurora {
-    0% {
-        transform: translate(0,0);
-    }
-    100% {
-        transform: translate(0,-5%);
-    }
 }
 
 /* Floating Orb Navigation */
@@ -165,21 +155,51 @@ body {
     z-index:1;
 }
 
-.mascot-wrap {
+.hero-title-wrap {
     margin-bottom:var(--spacing-lg);
-    transition:transform var(--transition);
-    display:inline-block;
-    /* Magical Glow for Transparent Bubble */
-    border-radius:50%;
-    padding:10px;
-    background:transparent;
-    box-shadow:0 0 30px rgba(151,253,228,0.3), 0 0 50px rgba(52,153,140,0.2);
-    animation: bubbleGlow 5s infinite alternate ease-in-out;
 }
 
-@keyframes bubbleGlow {
-    0% { box-shadow:0 0 30px rgba(151,253,228,0.3), 0 0 50px rgba(52,153,140,0.2);}
-    100% { box-shadow:0 0 40px rgba(151,253,228,0.4), 0 0 70px rgba(52,153,140,0.3); }
+.hero-title {
+    font-family:var(--font-display);
+    font-size:2.5rem;
+    font-weight:400;
+    color: var(--color-dark);
+    letter-spacing:-0.02em;
+    margin:0;
+    line-height:1.2;
+}
+
+.hero-subtitle {
+    font-family:var(--font-display);
+    font-size:3.5rem;
+    font-weight:400;
+    color: var(--color-dark);
+    letter-spacing:-0.02em;
+    margin: var(--spacing-xs) 0 var(--spacing-lg);
+    line-height:1.2;
+}
+
+.mascot-wrap {
+    transition:transform var(--transition);
+    display:inline-block;
+    position:relative;
+    margin-bottom:var(--spacing-lg);
+}
+
+/* Transparent bubble with magic glow */
+.mascot-wrap::after {
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-1;
+    background: radial-gradient(rgba(151,253,228,0.3), rgba(52,153,140,0.2), transparent 60%);
+    box-shadow:0 0 30px rgba(151,253,228,0.4), 0 0 60px rgba(52,153,140,0.3);
 }
 
 .mascot-wrap:hover {
@@ -191,16 +211,7 @@ body {
     height:294px;
     border-radius:50%;
     object-fit: cover;
-    background: transparent; /* now fully transparent bubble */
-}
-
-.hero-title {
-    font-family:var(--font-display);
-    font-size:3.5rem;
-    font-weight:400;
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-dark);
-    letter-spacing:-0.02em;
+    background: transparent;
 }
 
 .hero p {
@@ -255,6 +266,7 @@ section h2 {
     color: var(--color-dark);
     letter-spacing:-0.02em;
     font-family: var(--font-primary);
+    line-height:1.3;
 }
 
 section p {
@@ -291,6 +303,7 @@ section p {
     font-size:1.5rem;
     margin-bottom:var(--spacing-xs);
     color:var(--color-dark);
+    font-weight:600;
 }
 
 .tokenomics-item p {
@@ -314,11 +327,12 @@ footer {
 .footer-content p {
     color:var(--color-dark);
     font-size:0.875rem;
+    line-height:1.4;
 }
 
 /* Responsive Adjustments */
 @media (max-width:768px) {
-    .hero-title {
+    .hero-subtitle {
         font-size:2.5rem;
     }
 
@@ -331,6 +345,10 @@ footer {
         height:220px;
     }
 
+    .mascot-wrap::after {
+        width:260px; height:260px;
+    }
+
     section h2 {
         font-size:2rem;
     }
@@ -341,11 +359,15 @@ footer {
 }
 
 @media (max-width:480px) {
-    .hero-title {
+    .hero-subtitle {
         font-size:2rem;
     }
 
     .cta-button {
         width:100%;
+    }
+
+    .mascot-wrap::after {
+        width:240px; height:240px;
     }
 }
