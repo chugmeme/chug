@@ -32,10 +32,14 @@
         <div class="hero-content">
             <h1 class="hero-heading"><span class="intro-line">This is</span><br>CHUG</h1>
             <div class="mascot-wrap">
-                <video id="mascotVideo" class="mascot" autoplay loop muted playsinline preload="auto" poster="fallback.png"></video>
+                <video id="mascotVideo" class="mascot" autoplay loop muted playsinline preload="auto" poster="fallback.png">
+                    <source src="mascot.mov" type="video/quicktime">
+                    <source src="mascot.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
             </div>
-            <p>At the *end of all horizons*, where <em>infinite abundance</em> meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives to bestow <em>everything</em> upon you. Prosperity flows unbound—yours to <strong>CHUG</strong> in endless delight.</p>
-            <a href="#tokenomics" class="cta-button">Immerse & CHUG</a>
+            <p>At the <em>end of all horizons</em>, where <em>infinite abundance</em> meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives to bestow <em>everything</em> upon you. Prosperity flows unbound—yours to <strong>CHUG</strong> in endless delight.</p>
+            <a href="#tokenomics" class="cta-button">Immerse &amp; CHUG</a>
         </div>
     </section>
 
@@ -51,22 +55,22 @@
             <h2>Tokenomics</h2>
             <p>Like gentle waves in an ocean of prosperity, these allocations ensure that <em>liquidity</em> and <strong>abundance</strong> forever replenish. Each percentage is a quiet promise that everyone drinks freely from this wellspring.</p>
             <div class="tokenomics-grid">
-                <div class="tokenomics-item">
+                <button class="tokenomics-item" aria-label="Infinite Circulation">
                     <h3>70%</h3>
                     <p><em>Infinite Circulation</em></p>
-                </div>
-                <div class="tokenomics-item">
+                </button>
+                <button class="tokenomics-item" aria-label="Communal Flourish">
                     <h3>15%</h3>
                     <p><strong>Communal Flourish</strong></p>
-                </div>
-                <div class="tokenomics-item">
+                </button>
+                <button class="tokenomics-item" aria-label="Celestial Gifts">
                     <h3>10%</h3>
                     <p><em>Celestial Gifts</em></p>
-                </div>
-                <div class="tokenomics-item">
+                </button>
+                <button class="tokenomics-item" aria-label="Eternal Growth">
                     <h3>5%</h3>
                     <p><strong>Eternal Growth</strong></p>
-                </div>
+                </button>
             </div>
         </div>
     </section>
@@ -93,6 +97,7 @@
     </footer>
 
     <script>
+        // Canvas Animation
         const canvas = document.getElementById('cosmosCanvas');
         const ctx = canvas.getContext('2d');
         let w = canvas.width = window.innerWidth;
@@ -139,7 +144,7 @@
             h = canvas.height = window.innerHeight;
         });
 
-        // Orb navigation
+        // Orb Navigation
         const orb = document.querySelector('.floating-orb .orb');
         const navHints = document.querySelector('.nav-hints');
         let navOpen = false;
@@ -172,11 +177,11 @@
             });
         });
 
-        // Video format detection & fix for transparent background
+        // Video Format Detection & Fix for Transparent Background
         function supportsHEVCAlpha() {
             const ua = navigator.userAgent.toLowerCase();
             const hasMediaCapabilities = !!(navigator.mediaCapabilities && navigator.mediaCapabilities.decodingInfo);
-            const isSafari = (ua.indexOf('safari') != -1) && (ua.indexOf('chrome') == -1) && (ua.indexOf('version/') != -1);
+            const isSafari = (ua.indexOf('safari') !== -1) && (ua.indexOf('chrome') === -1) && (ua.indexOf('version/') !== -1);
             return isSafari && hasMediaCapabilities;
         }
 
@@ -186,10 +191,18 @@
         } else {
             player.src = 'mascot.webm'; 
         }
-        
-        // Ensure background is transparent even on Chrome iOS
-        player.style.background = 'none';
-        player.style.backgroundColor = 'transparent';
+
+        // Tokenomics Card Click Handling
+        document.querySelectorAll('.tokenomics-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Example Action: Scroll to a detailed section or open a modal
+                const detailId = item.getAttribute('aria-label').toLowerCase().replace(' ', '-');
+                const detailSection = document.getElementById(detailId);
+                if (detailSection) {
+                    detailSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
     </script>
 </body>
 </html>

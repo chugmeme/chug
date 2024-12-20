@@ -229,7 +229,7 @@ body::after {
     border-radius:50%;
     box-shadow:none;
     object-fit: cover;
-    background: none !important;
+    background: transparent !important;
     background-color: transparent !important;
 }
 
@@ -309,12 +309,20 @@ section p {
     border-radius:var(--radius-md);
     transition:transform var(--transition), box-shadow var(--transition), background var(--transition);
     border:1px solid rgba(0,0,0,0.05);
+    cursor: pointer;
 }
 
-.tokenomics-item:hover {
+.tokenomics-item:hover,
+.tokenomics-item:focus,
+.tokenomics-item:active {
     transform:translateY(-4px);
     box-shadow:0 10px 20px rgba(0,0,0,0.1);
     background: var(--color-aqua);
+}
+
+.tokenomics-item:focus {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 4px;
 }
 
 .tokenomics-item h3 {
@@ -362,7 +370,8 @@ footer {
     }
 
     .mascot-wrap::after {
-        width:260px; height:260px;
+        width:260px; 
+        height:260px;
     }
 
     section h2 {
@@ -371,6 +380,27 @@ footer {
 
     section p {
         font-size:1rem;
+    }
+
+    /* Adjust hero padding for tablets */
+    .hero {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .hero-content {
+        padding: var(--spacing-sm);
+    }
+
+    .hero-heading {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .mascot-wrap {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .cta-button {
+        padding: 0.75rem 1.5rem;
     }
 }
 
@@ -381,9 +411,34 @@ footer {
 
     .cta-button {
         width:100%;
+        padding: 0.75rem 1rem;
+    }
+
+    .mascot {
+        width:180px; 
+        height:180px;
     }
 
     .mascot-wrap::after {
-        width:240px; height:240px;
+        width:240px; 
+        height:240px;
+    }
+
+    /* Further adjust hero padding for mobile */
+    .hero {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .hero-content {
+        padding: var(--spacing-sm);
+    }
+
+    .hero p {
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Adjust hero heading line spacing */
+    .hero-heading {
+        line-height: 1.1;
     }
 }
