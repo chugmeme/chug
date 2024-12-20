@@ -135,9 +135,12 @@ body {
 }
 
 .mascot-wrap {
-    margin-bottom:var(--spacing-lg);
-    transition:transform var(--transition);
-    display:inline-block;
+    margin-bottom: var(--spacing-lg);
+    transition: transform var(--transition);
+    display: inline-block;
+    /* Add these properties to ensure proper background handling */
+    background-color: transparent;
+    -webkit-transform: translateZ(0);
 }
 
 .mascot-wrap:hover {
@@ -145,12 +148,20 @@ body {
 }
 
 .mascot {
-    width:350px; 
-    height:350px;
-    border-radius:50%;
-    box-shadow:0 0 20px rgba(0,0,0,0.05);
+    width: 350px; 
+    height: 350px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
     object-fit: cover;
-    background:transparent; /* Make bubble transparent */
+    /* Add these properties for iOS compatibility */
+    background-color: transparent !important;
+    -webkit-background-color: transparent !important;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    /* Ensure video is on GPU */
+    transform: translate3d(0,0,0);
+    will-change: transform;
 }
 
 .hero-title {
