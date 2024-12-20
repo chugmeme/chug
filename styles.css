@@ -230,6 +230,8 @@ body::after {
     object-fit: cover;
     background: transparent !important;
     background-color: transparent !important;
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,1)));
+    background: transparent !important;
 }
 
 .hero p {
