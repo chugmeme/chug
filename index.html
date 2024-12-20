@@ -194,14 +194,14 @@
                 } else {
                     // iOS Chrome - WebM with alpha as primary, MOV as fallback
                     player.innerHTML = `
-                        <source src="mascot-alpha.webm" type='video/webm; codecs="vp9"'>
+                        <source src="mascot.webm" type='video/webm; codecs="vp9"'>
                         <source src="mascot.mov" type='video/quicktime; codecs="hvc1"'>
                     `;
                 }
             } else {
                 // All other browsers - WebM with alpha
                 player.innerHTML = `
-                    <source src="mascot-alpha.webm" type='video/webm; codecs="vp9"'>
+                    <source src="mascot.webm" type='video/webm; codecs="vp9"'>
                 `;
             }
 
