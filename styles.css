@@ -203,7 +203,6 @@ body::after {
     position:relative;
 }
 
-/* Transparent bubble with magic glow */
 .mascot-wrap::after {
     content:"";
     position:absolute;
