@@ -33,9 +33,7 @@
             <h1 class="hero-heading"><span class="intro-line">This is</span><br>CHUG</h1>
             <div class="mascot-wrap">
                 <video id="mascotVideo" class="mascot" autoplay loop muted playsinline preload="auto" poster="fallback.png">
-                    <source src="mascot.mov" type="video/quicktime">
-                    <source src="mascot.webm" type="video/webm">
-                    Your browser does not support the video tag.
+                    <!-- Sources will be injected by JavaScript -->
                 </video>
             </div>
             <p>At the <em>end of all horizons</em>, where <em>infinite abundance</em> meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives to bestow <em>everything</em> upon you. Prosperity flows unbound—yours to <strong>CHUG</strong> in endless delight.</p>
@@ -177,20 +175,73 @@
             });
         });
 
-        // Video Format Detection & Fix for Transparent Background
-        function supportsHEVCAlpha() {
+        // Enhanced video format detection and handling
+        function detectBrowserAndVideoSupport() {
             const ua = navigator.userAgent.toLowerCase();
-            const hasMediaCapabilities = !!(navigator.mediaCapabilities && navigator.mediaCapabilities.decodingInfo);
-            const isSafari = (ua.indexOf('safari') !== -1) && (ua.indexOf('chrome') === -1) && (ua.indexOf('version/') !== -1);
-            return isSafari && hasMediaCapabilities;
+            const isIOS = /iphone|ipad|ipod/.test(ua);
+            const isChrome = ua.includes('crios') || ua.includes('chrome');
+            const isSafari = ua.includes('safari') && !isChrome;
+            
+            const player = document.getElementById('mascotVideo');
+
+            if (isIOS) {
+                if (isSafari) {
+                    // iOS Safari - HEVC with alpha
+                    player.innerHTML = `
+                        <source src="mascot.mov" type='video/quicktime; codecs="hvc1"'>
+                        <source src="mascot.webm" type='video/webm; codecs="vp8,vorbis"'>
+                    `;
+                } else {
+                    // iOS Chrome - WebM with alpha as primary, MOV as fallback
+                    player.innerHTML = `
+                        <source src="mascot-alpha.webm" type='video/webm; codecs="vp9"'>
+                        <source src="mascot.mov" type='video/quicktime; codecs="hvc1"'>
+                    `;
+                }
+            } else {
+                // All other browsers - WebM with alpha
+                player.innerHTML = `
+                    <source src="mascot-alpha.webm" type='video/webm; codecs="vp9"'>
+                `;
+            }
+
+            // Ensure video properties
+            player.playsInline = true;
+            player.autoplay = true;
+            player.muted = true;
+            player.loop = true;
+
+            // Error handling fallback
+            player.addEventListener('error', (e) => {
+                console.error('Video error:', player.error);
+                if (player.error) {
+                    const img = document.createElement('img');
+                    img.src = 'fallback.png';
+                    img.className = 'mascot';
+                    img.alt = 'CHUG mascot';
+                    player.parentNode.replaceChild(img, player);
+                }
+            });
         }
 
-        const player = document.getElementById('mascotVideo');
-        if (supportsHEVCAlpha()) {
-            player.src = 'mascot.mov'; 
-        } else {
-            player.src = 'mascot.webm'; 
+        function handleVideoStates(player) {
+            // Set initial loading state
+            player.setAttribute('data-state', 'loading');
+            
+            player.addEventListener('loadeddata', () => {
+                player.setAttribute('data-state', 'playing');
+            });
+            
+            player.addEventListener('playing', () => {
+                player.setAttribute('data-state', 'playing');
+            });
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            detectBrowserAndVideoSupport();
+            const player = document.getElementById('mascotVideo');
+            handleVideoStates(player);
+        });
 
         // Tokenomics Card Click Handling
         document.querySelectorAll('.tokenomics-item').forEach(item => {
