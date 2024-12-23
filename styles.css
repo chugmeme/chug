@@ -351,8 +351,8 @@ section p {
 /* Chaos Mascot (roaming) */
 .chaos-mascot {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     background-color: transparent;
@@ -366,14 +366,14 @@ section p {
         transform: scale(1);
     }
     50% {
-        transform: scale(0.92);
+        transform: scale(0.93);
     }
     100% {
         transform: scale(1);
     }
 }
 .bubble-distort {
-    animation: bubbleDistort 0.5s ease-out;
+    animation: bubbleDistort 0.3s ease-out;
 }
 
 /* Footer */
