@@ -31,12 +31,13 @@
     </div>
   </div>
   
-  <!-- HERO SECTION occupying exactly one screen, no scroll inside -->
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="cosmic-canvas">
       <canvas id="cosmosCanvas"></canvas>
     </div>
     <div class="hero-content">
+      <!-- Only the heading is specially large -->
       <h1 class="hero-heading glow">
         <span class="intro-line">This is</span>
         CHUG
@@ -57,6 +58,7 @@
         </video>
       </div>
 
+      <!-- Paragraph + CTA follow the normal design system sizes -->
       <p>
         At the <em>end of all horizons</em>, where <em>infinite abundance</em> 
         meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives 
@@ -64,7 +66,6 @@
         yours to <strong>CHUG</strong> in endless delight.
       </p>
       
-      <!-- CTA always visible in hero -->
       <a href="#tokenomics" class="cta-button">CHUG the Universe</a>
     </div>
   </section>
@@ -293,7 +294,6 @@
        =============================== */
     const chaosMascot = document.getElementById('chaosMascot');
 
-    // Decide which video format to use for Chaos
     if (hevcAlphaSupport === 'probably' || hevcAlphaSupport === 'maybe') {
       chaosMascot.src = 'chugfloat.mov';
     } else if (vp9Support === 'probably' || vp9Support === 'maybe') {

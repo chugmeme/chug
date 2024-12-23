@@ -153,41 +153,31 @@
   
   /* 
      HERO SECTION 
-     Enforce EXACT single screen usage 
-     no scroll => CTA always visible.
+     EXACT single screen usage, no scroll => 
+     and only the special heading is bigger 
   */
   .hero {
     width: 100%;
-    height: 100vh;    /* precisely one screen */
-    overflow: hidden; /* no scrolling in hero */
+    height: 100vh;
+    overflow: hidden;
   
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   
-    /* moderate horizontal padding to avoid edges;
-       minimal vertical to ensure no overflow 
-    */
-    padding: var(--spacing-md);
+    /* minimal padding to avoid edges but keep everything in view */
+    padding: var(--spacing-sm);
     position: relative;
   }
   
-  /* cosmic canvas behind hero content */
   .cosmic-canvas {
     position: absolute;
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     pointer-events: none;
     z-index: 0;
   }
   
-  /* 
-     hero-content uses clamp so it shrinks 
-     if device is too small
-  */
   .hero-content {
     z-index: 1;
     display: flex;
@@ -195,27 +185,31 @@
     align-items: center;
     text-align: center;
   
-    /* moderate gap, 
-       big gap can push CTA offscreen on smaller devices 
+    /* moderate gap so items are spaced 
+       but not so large it pushes CTA out 
     */
-    gap: 1.5rem;
+    gap: var(--spacing-md);
   
     width: 100%;
     max-width: 800px;
   }
   
-  /* heading scales with clamp */
+  /* 
+     The special hero heading:
+     bigger than normal text system,
+     but only for heading 
+  */
   .hero-heading {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.02em;
-    font-size: clamp(2rem, 6vw, 4.5rem);
+    /* large heading for "This is CHUG" */
+    font-size: 4.5rem; 
     line-height: 1.1;
     color: var(--color-light);
     position: relative;
   }
   
-  /* glowing heading effect */
   .hero-heading.glow {
     animation: headingGlow 3s ease-in-out infinite alternate;
   }
@@ -234,12 +228,13 @@
   .intro-line {
     display: block;
     font-family: var(--font-primary);
-    font-size: clamp(1rem, 3vw, 1.5rem);
-    margin-bottom: 0.1em;
+    /* a bit smaller than main heading but consistent */
+    font-size: 1.5rem;
+    margin-bottom: 0.2em;
     opacity: 0.9;
   }
   
-  /* Mascot bubble also scaled with clamp */
+  /* The bubble around the mascot is moderate in size */
   .mascot-wrap {
     position: relative;
     transition: transform var(--transition);
@@ -251,8 +246,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(180px, 25vw, 320px);
-    height: clamp(180px, 25vw, 320px);
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
     pointer-events: none;
     z-index: -1;
@@ -269,10 +264,10 @@
     transform: scale(1.04);
   }
   
-  /* actual mascot video also clamp */
+  /* Mascot video sized consistently */
   .mascot {
-    width: clamp(180px, 25vw, 320px);
-    height: clamp(180px, 25vw, 320px);
+    width: 320px; 
+    height: 320px;
     border-radius: 50%;
     object-fit: cover;
     background-color: transparent !important;
@@ -280,14 +275,18 @@
     box-shadow: none;
   }
   
-  /* hero paragraph also clamp */
+  /* 
+     Hero paragraph + CTA 
+     follow normal system sizes
+  */
   .hero p {
-    font-size: clamp(0.9rem, 2vw, 1.25rem);
-    line-height: 1.4;
+    font-size: 1.125rem;
+    line-height: 1.6;
     max-width: 600px;
     color: var(--color-light);
   }
   
+  /* Distortion bubble animation */
   @keyframes blobMorph {
     0% {
       border-radius: 50%;
@@ -311,15 +310,15 @@
     animation: blobMorph 2s forwards;
   }
   
-  /* CTA also uses clamp so it never forces overflow */
+  /* CTA Button follows normal system's button styling */
   .cta-button {
     font-family: var(--font-display);
-    font-size: clamp(0.8rem, 2.2vw, 1rem);
+    font-size: 1rem;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(0.5rem, 1.2vw, 0.75rem) clamp(1rem, 3vw, 2rem);
+    padding: 0.75rem 2rem;
     background: linear-gradient(90deg, var(--color-aqua), var(--color-teal));
     color: var(--color-dark);
     border-radius: var(--radius-md);
@@ -335,7 +334,7 @@
     box-shadow: 0 15px 30px rgba(0,0,0,0.6);
   }
   
-  /* Other sections can scroll normally */
+  /* Sections below hero follow normal spacing */
   section {
     padding: var(--spacing-lg) var(--spacing-md);
   }
@@ -417,7 +416,6 @@
     z-index: 9999; 
   }
   
-  /* Distortion effect on chaos bubble collision */
   @keyframes bubbleDistort {
     0% {
       transform: scale(1);
