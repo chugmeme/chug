@@ -494,6 +494,11 @@
       font-size: 3.2rem;
     }
   
+    /* Reduce top padding to make the hero shorter on mobile */
+    .hero {
+        padding-top: 50px;
+    }
+  
     /* The hero paragraph: slightly smaller than 1.125rem => 1rem */
     .hero p {
       font-size: 1rem;
