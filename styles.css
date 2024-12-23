@@ -489,36 +489,33 @@
      - possibly smaller .mascot if needed
   */
   @media (max-width: 480px) {
-    /* Keep big heading but maybe scale it a bit down for narrow screens */
+    .hero {
+      /* Use dynamic viewport height to respect mobile browser UI */
+      height: 100dvh;
+      overflow: hidden;
+    }
+  
     .hero-heading {
       font-size: 3.2rem;
     }
   
-    /* Reduce top padding to make the hero shorter on mobile */
-    .hero {
-        padding-top: 50px;
-    }
-  
-    /* The hero paragraph: slightly smaller than 1.125rem => 1rem */
     .hero p {
       font-size: 1rem;
       line-height: 1.4;
     }
   
-    /* CTA button smaller text & padding for mobile */
     .cta-button {
       font-size: 0.95rem;
       padding: 0.6rem 1.5rem;
     }
   
-    /* Mascot bubble a bit smaller so it doesn't push CTA off screen */
     .mascot {
-      width: 260px; 
+      width: 260px;
       height: 260px;
     }
+  
     .mascot-wrap::after {
-      width: 260px; 
+      width: 260px;
       height: 260px;
     }
   }
-  
