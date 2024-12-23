@@ -32,8 +32,12 @@
             <canvas id="cosmosCanvas"></canvas>
         </div>
         <div class="hero-content">
-            <h1 class="hero-heading"><span class="intro-line">This is</span><br>CHUG</h1>
+            <h1 class="hero-heading">
+                <span class="intro-line">This is</span>
+                CHUG
+            </h1>
             <div class="mascot-wrap">
+                <!-- Hero Mascot with Bubble -->
                 <video 
                     id="mascotVideo" 
                     class="mascot" 
@@ -98,6 +102,18 @@
         </div>
     </section>
 
+    <!-- Chaos Mascot that roams the page with a bubble effect -->
+    <video 
+        id="chaosMascot"
+        class="chaos-mascot"
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        webkit-playsinline 
+        poster="fallback.png">
+    </video>
+
     <footer>
         <div class="footer-content">
             <p>&copy; 2024 <strong>CHUG</strong>. Flowing beyond boundaries, granting all that is and ever will be—forever <em>yours</em>.</p>
@@ -105,7 +121,9 @@
     </footer>
 
     <script>
-        // Canvas Animation
+        // ================
+        // COSMOS BACKGROUND
+        // ================
         const canvas = document.getElementById('cosmosCanvas');
         const ctx = canvas.getContext('2d');
         let w = canvas.width = window.innerWidth;
@@ -118,41 +136,43 @@
         ];
 
         const particles = [];
-        for(let i = 0; i < 120; i++){
+        for (let i = 0; i < 120; i++) {
             particles.push({
-                x: Math.random()*w,
-                y: Math.random()*h,
-                vx: (Math.random()-0.5)*0.5,
-                vy: (Math.random()-0.5)*0.5,
-                r: Math.random()*3+1,
-                color: paletteColors[Math.floor(Math.random()*paletteColors.length)]
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                r: Math.random() * 3 + 1,
+                color: paletteColors[Math.floor(Math.random() * paletteColors.length)]
             });
         }
 
-        function animate(){
-            ctx.clearRect(0,0,w,h);
-            ctx.globalCompositeOperation='lighter';
-            for(let p of particles){
+        function animateStars() {
+            ctx.clearRect(0, 0, w, h);
+            ctx.globalCompositeOperation = 'lighter';
+            for (let p of particles) {
                 p.x += p.vx;
                 p.y += p.vy;
-                if(p.x < 0 || p.x > w) p.vx *= -1;
-                if(p.y < 0 || p.y > h) p.vy *= -1;
+                if (p.x < 0 || p.x > w) p.vx *= -1;
+                if (p.y < 0 || p.y > h) p.vy *= -1;
                 
                 ctx.beginPath();
-                ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 ctx.fillStyle = p.color;
                 ctx.fill();
             }
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateStars);
         }
-        animate();
+        animateStars();
 
-        window.addEventListener('resize',()=>{
+        window.addEventListener('resize', () => {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
         });
 
-        // Orb Navigation
+        // ================
+        // ORB NAVIGATION
+        // ================
         const orb = document.querySelector('.floating-orb .orb');
         const navHints = document.querySelector('.nav-hints');
         let navOpen = false;
@@ -185,7 +205,10 @@
             });
         });
 
-        // Capability-based video format detection
+        // ==========================================
+        // CAPABILITY-BASED VIDEO FORMAT DETECTION
+        // (For the main hero mascot)
+        // ==========================================
         const player = document.getElementById('mascotVideo');
         const testVideo = document.createElement('video');
 
@@ -199,17 +222,21 @@
         const vp9Support = testVideo.canPlayType('video/webm; codecs="vp9"');
 
         if (hevcAlphaSupport === 'probably' || hevcAlphaSupport === 'maybe') {
-            player.src = 'okchug.mov';
+            player.src = 'okchug.mov';  // Your .mov with alpha
         } else if (vp9Support === 'probably' || vp9Support === 'maybe') {
-            player.src = 'okchug9.webm';
+            player.src = 'okchug9.webm'; // Your .webm with alpha
         } else {
             console.warn('Neither HEVC alpha nor VP9 alpha is supported by this browser.');
         }
 
-        // Tokenomics Card Click Handling
+        // =====================================
+        // TOKENOMICS CARD CLICK HANDLING
+        // =====================================
         document.querySelectorAll('.tokenomics-item').forEach(item => {
             item.addEventListener('click', () => {
-                const detailId = item.getAttribute('aria-label').toLowerCase().replace(' ', '-');
+                const detailId = item.getAttribute('aria-label')
+                                    .toLowerCase()
+                                    .replace(' ', '-');
                 const detailSection = document.getElementById(detailId);
                 if (detailSection) {
                     detailSection.scrollIntoView({ behavior: 'smooth' });
@@ -217,7 +244,9 @@
             });
         });
 
-        // Distortion Trigger on Mascot Click/Touch
+        // =================================================
+        // DISTORTION TRIGGER ON HERO MASCOT CLICK/TOUCH
+        // =================================================
         const mascotWrap = document.querySelector('.mascot-wrap');
         const mascotVideo = document.getElementById('mascotVideo');
 
@@ -227,6 +256,146 @@
             setTimeout(() => {
                 mascotWrap.classList.remove('distort');
             }, 2000);
+        });
+
+        // ===============================
+        // CHAOS MASCOT THAT ROAMS THE PAGE
+        // ===============================
+        const chaosMascot = document.getElementById('chaosMascot');
+
+        // Decide which video format to use for Chaos
+        if (hevcAlphaSupport === 'probably' || hevcAlphaSupport === 'maybe') {
+            chaosMascot.src = 'okchug.mov';
+        } else if (vp9Support === 'probably' || vp9Support === 'maybe') {
+            chaosMascot.src = 'okchug9.webm';
+        } else {
+            console.warn('No alpha video support for chaos mascot, fallback used.');
+        }
+
+        let cx = Math.random() * (window.innerWidth - 80);
+        let cy = Math.random() * (window.innerHeight - 80);
+        let cvx = (Math.random() - 0.5) * 5; 
+        let cvy = (Math.random() - 0.5) * 5;
+        const chaosSize = 80;
+
+        // Speed factor and interpolation variables
+        let baseSpeedFactor = 1;     // normal speed
+        let currentSpeedFactor = 1;  // current speed factor (changes over time)
+        let clickTime = 0;           // when user last clicked chaos
+        let accelActive = false;     // is acceleration active?
+        const accelDuration = 3000;  // 3 seconds
+
+        // For collision with the hero bubble
+        function getHeroBubbleData() {
+            // The ".mascot-wrap" is the container that has the big bubble
+            const rect = mascotWrap.getBoundingClientRect();
+            // We'll treat it as a circle that fits exactly inside:
+            const hx = rect.left + rect.width / 2;
+            const hy = rect.top + rect.height / 2;
+            // The bubble is (roughly) as big as .mascot-wrap's ::after pseudo-element,
+            // but let's at least use half the bounding box:
+            const hr = Math.min(rect.width, rect.height) / 2;
+            return { hx, hy, hr };
+        }
+
+        function moveChaos(timestamp) {
+            // If accelActive, linearly interpolate from 3 -> 1 over 3 seconds
+            if (accelActive) {
+                const elapsed = timestamp - clickTime; 
+                if (elapsed < accelDuration) {
+                    const t = elapsed / accelDuration;   // in [0..1]
+                    currentSpeedFactor = 3 - 2 * t;       // 3 -> 1 over time
+                } else {
+                    currentSpeedFactor = baseSpeedFactor; // back to normal
+                    accelActive = false;
+                }
+            }
+
+            // Update position with velocity * current speed factor
+            cx += cvx * currentSpeedFactor;
+            cy += cvy * currentSpeedFactor;
+
+            // Bounce off window edges
+            if (cx < 0) {
+                cx = 0; 
+                cvx = -cvx;
+            }
+            if (cx + chaosSize > window.innerWidth) {
+                cx = window.innerWidth - chaosSize;
+                cvx = -cvx;
+            }
+            if (cy < 0) {
+                cy = 0;
+                cvy = -cvy;
+            }
+            if (cy + chaosSize > window.innerHeight) {
+                cy = window.innerHeight - chaosSize;
+                cvy = -cvy;
+            }
+
+            // ----- Check collision with hero bubble -----
+            const { hx, hy, hr } = getHeroBubbleData();
+            // Chaos bubble center:
+            const ccx = cx + chaosSize / 2;
+            const ccy = cy + chaosSize / 2;
+            // Distance between centers
+            const dx = ccx - hx;
+            const dy = ccy - hy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            // Sum of radii = chaos bubble radius + hero bubble radius
+            const chaosRadius = chaosSize / 2;
+            const sumR = chaosRadius + hr;
+
+            if (dist < sumR) {
+                // There's a collision: push chaos bubble out + reflect velocity
+
+                // Overlap is how far 'inside' the hero bubble we are
+                const overlap = sumR - dist;
+                // Normal from hero center to chaos center
+                const nx = dx / dist;
+                const ny = dy / dist;
+
+                // Move chaos out of overlap
+                cx += nx * overlap;
+                cy += ny * overlap;
+
+                // Reflect velocity about collision normal
+                const dot = cvx * nx + cvy * ny; 
+                cvx = cvx - 2 * dot * nx;
+                cvy = cvy - 2 * dot * ny;
+
+                // Trigger a short 'distort' or 'bubble-distort' animation for both
+                chaosMascot.classList.add('bubble-distort');
+                mascotWrap.classList.add('bubble-distort');
+                setTimeout(() => {
+                    chaosMascot.classList.remove('bubble-distort');
+                    mascotWrap.classList.remove('bubble-distort');
+                }, 500);
+            }
+
+            // Apply final position
+            chaosMascot.style.left = cx + 'px';
+            chaosMascot.style.top = cy + 'px';
+
+            requestAnimationFrame(moveChaos);
+        }
+        requestAnimationFrame(moveChaos);
+
+        // On click => triple speed immediately, then gradually return to normal
+        chaosMascot.addEventListener('click', () => {
+            currentSpeedFactor = 3;
+            accelActive = true;
+            clickTime = performance.now();
+        });
+
+        // Re-calc on resize
+        window.addEventListener('resize', () => {
+            if (cx + chaosSize > window.innerWidth) {
+                cx = window.innerWidth - chaosSize;
+            }
+            if (cy + chaosSize > window.innerHeight) {
+                cy = window.innerHeight - chaosSize;
+            }
         });
     </script>
 </body>
