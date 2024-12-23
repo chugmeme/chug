@@ -15,6 +15,522 @@
 
   <!-- External CSS -->
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+  /* =========================
+     START OF IMPROVED CSS
+     ========================= */
+
+  :root {
+    --color-dark: #0D0D0D;
+    --color-light: #EDFFFC;
+    --color-aqua: #97FDE4;
+    --color-teal: #34998C;
+    
+    /* Font families */
+    --font-display: 'Fredoka One', sans-serif;
+    --font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-base: 16px;
+    
+    /* Spacing, radius, and transitions */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    --radius-md: 20px;
+    --transition: 0.4s ease;
+  }
+  
+  * {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    font-size: var(--font-size-base);
+    height: 100%;
+  }
+  
+  body {
+    font-family: var(--font-primary);
+    line-height: 1.5;
+    background: var(--color-dark);
+    color: var(--color-light);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100%;
+  }
+  
+  /* Subtle aura behind everything */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+      circle at 50% 50%, 
+      rgba(151,253,228,0.05), 
+      rgba(52,153,140,0.05), 
+      transparent 70%
+    );
+    animation: auramove 60s ease-in-out infinite alternate;
+  }
+  
+  @keyframes auramove {
+    0% {
+      background: radial-gradient(
+        circle at 50% 50%, 
+        rgba(151,253,228,0.05), 
+        rgba(52,153,140,0.05), 
+        transparent 70%
+      );
+    }
+    100% {
+      background: radial-gradient(
+        circle at 55% 45%, 
+        rgba(52,153,140,0.05), 
+        rgba(151,253,228,0.05), 
+        transparent 70%
+      );
+    }
+  }
+  
+  /* Infinite cosmic background gradient */
+  .infinite-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, #1A1A1A 0%, #0D0D0D 60%, #000 100%);
+    z-index: -2;
+  }
+  
+  /* Floating orb nav */
+  .floating-orb {
+    position: fixed;
+    top: 50%;
+    right: var(--spacing-md);
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .orb {
+    width: 44px; 
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--color-aqua), var(--color-teal));
+    box-shadow: 0 0 10px rgba(151,253,228,0.3),
+                0 0 20px rgba(52,153,140,0.4);
+    transition: transform var(--transition), box-shadow var(--transition);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .floating-orb:hover .orb {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(151,253,228,0.5),
+                0 0 40px rgba(52,153,140,0.6);
+  }
+  
+  .nav-hints {
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    transition: all var(--transition);
+  }
+  
+  .nav-hints.show {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .nav-hints a {
+    color: var(--color-dark);
+    background: var(--color-light);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  
+  .nav-hints a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+  }
+  
+  /* HERO: one full screen, no scroll, 
+     heading special, everything else standard */
+  .hero {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    position: relative;
+  }
+  
+  /* cosmic canvas behind hero content */
+  .cosmic-canvas {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* hero-content: column with normal gap */
+  .hero-content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-md);
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* Animate hero content for a microinteraction */
+  .hero-content.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1.2s forwards;
+    animation-delay: 0.3s;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* The special large heading for "This is CHUG" */
+  .hero-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-size: 4.5rem; 
+    line-height: 1.1;
+    color: var(--color-light);
+    position: relative;
+  }
+  
+  .hero-heading.glow {
+    animation: headingGlow 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes headingGlow {
+    0% {
+      text-shadow: 0 0 8px var(--color-aqua),
+                   0 0 15px var(--color-aqua);
+    }
+    100% {
+      text-shadow: 0 0 12px var(--color-teal),
+                   0 0 24px var(--color-teal);
+    }
+  }
+  
+  /* smaller sub-line */
+  .intro-line {
+    display: block;
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    margin-bottom: 0.2em;
+    opacity: 0.9;
+  }
+  
+  /* Mascot bubble moderate size */
+  .mascot-wrap {
+    position: relative;
+    transition: transform var(--transition);
+  }
+  
+  .mascot-wrap::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+      rgba(151,253,228,0.2),
+      rgba(52,153,140,0.15),
+      transparent 60%
+    );
+    box-shadow: 0 0 30px rgba(151,253,228,0.3),
+                0 0 60px rgba(52,153,140,0.25);
+    transition: all var(--transition);
+  }
+  
+  .mascot-wrap:hover {
+    transform: scale(1.04);
+  }
+  
+  /* Mascot video also 320x320 */
+  .mascot {
+    width: 320px; 
+    height: 320px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: transparent !important;
+    cursor: pointer;
+    box-shadow: none;
+  }
+  
+  /* hero paragraph follows normal system (1.125rem) */
+  .hero p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    color: var(--color-light);
+  }
+  
+  /* Distortion effect on bubble */
+  @keyframes blobMorph {
+    0% {
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    30% {
+      border-radius: 40% 60% 55% 45% / 45% 55% 40% 60%;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+    60% {
+      border-radius: 55% 45% 60% 50% / 50% 45% 60% 55%;
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    100% {
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  .mascot-wrap.distort::after {
+    animation: blobMorph 2s forwards;
+  }
+  
+  /* CTA button follows normal system (1rem) */
+  .cta-button {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2.2rem;
+    background: linear-gradient(135deg, var(--color-aqua), var(--color-teal));
+    color: var(--color-dark);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--transition);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+  }
+
+  /* Subtle arrow icon for CTA */
+  .cta-button::after {
+    content: "→";
+    margin-left: 0.5rem;
+    transition: transform var(--transition);
+  }
+  
+  .cta-button:hover::after {
+    transform: translateX(3px);
+  }
+  
+  /* Normal sections below hero */
+  section {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-light);
+    letter-spacing: -0.02em;
+    font-family: var(--font-primary);
+  }
+  
+  section p {
+    font-size: 1.125rem;
+    color: var(--color-light);
+    max-width: 600px;
+    margin: 0 auto var(--spacing-md);
+    line-height: 1.6;
+  }
+  
+  /* Fade-in sections on scroll microinteraction */
+  .fade-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Tokenomics grid/items - same system */
+  .tokenomics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+  }
+  
+  .tokenomics-item {
+    background: rgba(255,255,255,0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+  }
+  
+  .tokenomics-item:hover,
+  .tokenomics-item:focus,
+  .tokenomics-item:active {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    background: rgba(151,253,228,0.1);
+  }
+  
+  .tokenomics-item:focus {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 4px;
+  }
+  
+  .tokenomics-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-light);
+  }
+  
+  .tokenomics-item p {
+    font-size: 0.875rem;
+    margin: 0;
+    color: var(--color-light);
+  }
+  
+  /* Chaos Mascot */
+  .chaos-mascot {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 9999; 
+  }
+  
+  @keyframes bubbleDistort {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.92);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .bubble-distort {
+    animation: bubbleDistort 0.5s ease-out;
+  }
+  
+  /* Footer */
+  footer {
+    background: #1A1A1A;
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-content p {
+    color: var(--color-light);
+    font-size: 0.875rem;
+  }
+  
+  /* 
+     MOBILE ADJUSTMENTS 
+     - reduce .hero p and .cta-button font size
+     - possibly smaller .mascot if needed
+  */
+  @media (max-width: 480px) {
+    /* Keep big heading but maybe scale it a bit down for narrow screens */
+    .hero-heading {
+      font-size: 3.2rem;
+    }
+  
+    /* The hero paragraph: slightly smaller than 1.125rem => 1rem */
+    .hero p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+  
+    /* CTA button smaller text & padding for mobile */
+    .cta-button {
+      font-size: 0.95rem;
+      padding: 0.6rem 1.5rem;
+    }
+  
+    /* Mascot bubble a bit smaller so it doesn't push CTA off screen */
+    .mascot {
+      width: 260px; 
+      height: 260px;
+    }
+    .mascot-wrap::after {
+      width: 260px; 
+      height: 260px;
+    }
+  }
+  </style>
 </head>
 <body>
   <!-- Infinite background gradient -->
@@ -36,7 +552,7 @@
     <div class="cosmic-canvas">
       <canvas id="cosmosCanvas"></canvas>
     </div>
-    <div class="hero-content">
+    <div class="hero-content fade-in">
       <!-- Special large hero heading -->
       <h1 class="hero-heading glow">
         <span class="intro-line">This is</span>
@@ -62,24 +578,26 @@
       <p>
         At the <em>end of all horizons</em>, where <em>infinite abundance</em> 
         meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives 
-        to bestow <em>everything</em> upon you.
+        to bestow <em>everything</em> upon you. Prosperity flows unbound—
+        yours to <strong>CHUG</strong> in endless delight.
       </p>
       
       <a href="#tokenomics" class="cta-button">CHUG the Universe</a>
     </div>
   </section>
 
-  <section id="about">
+  <section id="about" class="fade-section">
     <div class="content-container">
       <h2>Pure Integration</h2>
-      <p> 
+      <p>
+        In this final form, all cultural streams—art, innovation, humor, wisdom, technology—meld seamlessly. 
         <em>CHUG</em> distills countless eras and civilizations into a serene reservoir of infinite giving, 
         where every drop is <strong>yours</strong>.
       </p>
     </div>
   </section>
 
-  <section id="tokenomics">
+  <section id="tokenomics" class="fade-section">
     <div class="content-container">
       <h2>Tokenomics</h2>
       <p>
@@ -108,7 +626,7 @@
     </div>
   </section>
 
-  <section id="mission">
+  <section id="mission" class="fade-section">
     <div class="content-container">
       <h2>Our Mission</h2>
       <p>
@@ -119,7 +637,7 @@
     </div>
   </section>
 
-  <section id="community">
+  <section id="community" class="fade-section">
     <div class="content-container">
       <h2>Join the Eternal Flow</h2>
       <p>
@@ -404,6 +922,24 @@
       if (cy + chaosSize > window.innerHeight) {
         cy = window.innerHeight - chaosSize;
       }
+    });
+
+    /* ===============================
+       FADE SECTIONS ON SCROLL
+       =============================== */
+    const sections = document.querySelectorAll('.fade-section');
+
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
     });
   </script>
 </body>
