@@ -289,11 +289,9 @@
         function getHeroBubbleData() {
             // The ".mascot-wrap" is the container that has the big bubble
             const rect = mascotWrap.getBoundingClientRect();
-            // We'll treat it as a circle that fits exactly inside:
             const hx = rect.left + rect.width / 2;
             const hy = rect.top + rect.height / 2;
-            // The bubble is (roughly) as big as .mascot-wrap's ::after pseudo-element,
-            // but let's at least use half the bounding box:
+            // We'll treat it as a circle that fits exactly inside:
             const hr = Math.min(rect.width, rect.height) / 2;
             return { hx, hy, hr };
         }
@@ -303,15 +301,14 @@
             if (accelActive) {
                 const elapsed = timestamp - clickTime; 
                 if (elapsed < accelDuration) {
-                    const t = elapsed / accelDuration;   // in [0..1]
+                    const t = elapsed / accelDuration;   
                     currentSpeedFactor = 3 - 2 * t;       // 3 -> 1 over time
                 } else {
-                    currentSpeedFactor = baseSpeedFactor; // back to normal
+                    currentSpeedFactor = baseSpeedFactor; 
                     accelActive = false;
                 }
             }
 
-            // Update position with velocity * current speed factor
             cx += cvx * currentSpeedFactor;
             cy += cvy * currentSpeedFactor;
 
@@ -348,18 +345,11 @@
 
             if (dist < sumR) {
                 // There's a collision: push chaos bubble out + reflect velocity
-
-                // Overlap is how far 'inside' the hero bubble we are
                 const overlap = sumR - dist;
-                // Normal from hero center to chaos center
                 const nx = dx / dist;
                 const ny = dy / dist;
-
-                // Move chaos out of overlap
                 cx += nx * overlap;
                 cy += ny * overlap;
-
-                // Reflect velocity about collision normal
                 const dot = cvx * nx + cvy * ny; 
                 cvx = cvx - 2 * dot * nx;
                 cvy = cvy - 2 * dot * ny;
@@ -373,7 +363,6 @@
                 }, 500);
             }
 
-            // Apply final position
             chaosMascot.style.left = cx + 'px';
             chaosMascot.style.top = cy + 'px';
 

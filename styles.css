@@ -182,7 +182,7 @@ body::after {
     display: inline-block;
     position: relative;
     transition: transform var(--transition);
-    /* The large bubble around the mascot is formed by ::after */
+    /* Large bubble around the mascot is formed by ::after */
 }
 
 .mascot-wrap::after {
@@ -351,8 +351,8 @@ section p {
 /* Chaos Mascot (roaming) */
 .chaos-mascot {
     position: absolute;
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     background-color: transparent;
@@ -366,14 +366,14 @@ section p {
         transform: scale(1);
     }
     50% {
-        transform: scale(0.93);
+        transform: scale(0.92);
     }
     100% {
         transform: scale(1);
     }
 }
 .bubble-distort {
-    animation: bubbleDistort 0.3s ease-out;
+    animation: bubbleDistort 0.5s ease-out;
 }
 
 /* Footer */
@@ -395,12 +395,24 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    .hero {
+        /* Let the hero adapt better on tablets and smaller devices */
+        min-height: auto;
+        padding: var(--spacing-md) var(--spacing-sm);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-md);
+    }
+
     .hero-heading {
         font-size: 2.5rem;
+        margin-bottom: var(--spacing-md);
     }
 
     .hero p {
         font-size: 1.125rem;
+        margin-bottom: var(--spacing-md);
     }
 
     .mascot {
@@ -408,29 +420,12 @@ footer {
         height: 220px;
     }
 
+    .mascot-wrap {
+        margin-bottom: var(--spacing-md);
+    }
     .mascot-wrap::after {
         width: 260px; 
         height: 260px;
-    }
-
-    section h2 {
-        font-size: 2rem;
-    }
-
-    section p {
-        font-size: 1rem;
-    }
-
-    .hero {
-        padding: var(--spacing-lg) var(--spacing-sm);
-    }
-
-    .hero-heading {
-        margin-bottom: var(--spacing-md);
-    }
-
-    .mascot-wrap {
-        margin-bottom: var(--spacing-md);
     }
 
     .cta-button {
@@ -441,6 +436,8 @@ footer {
 @media (max-width: 480px) {
     .hero-heading {
         font-size: 2rem;
+        line-height: 1.1;
+        margin-bottom: var(--spacing-sm);
     }
 
     .cta-button {
@@ -459,14 +456,11 @@ footer {
     }
 
     .hero {
+        gap: var(--spacing-md);
         padding: var(--spacing-md) var(--spacing-sm);
     }
 
     .hero p {
         margin-bottom: var(--spacing-md);
-    }
-
-    .hero-heading {
-        line-height: 1.1;
     }
 }
