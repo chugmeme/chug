@@ -31,6 +31,7 @@
 html {
     scroll-behavior: smooth;
     font-size: var(--font-size-base);
+    height: 100%;
 }
 
 body {
@@ -40,6 +41,7 @@ body {
     background: var(--color-light);
     overflow-x: hidden;
     position: relative;
+    min-height: 100%;
 }
 
 /* Subtle animated aura */
@@ -134,14 +136,15 @@ body::after {
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
-/* Hero */
+/* HERO SECTION - full screen */
 .hero {
-    min-height: 100vh;
+    /* Force full viewport height */
+    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: var(--spacing-xl) var(--spacing-md);
+    align-items: center;
     position: relative;
+    padding: 0 var(--spacing-md);
     overflow: hidden;
 }
 
@@ -153,15 +156,18 @@ body::after {
 }
 
 .hero-content {
+    z-index: 1;
     text-align: center;
     max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* The gap ensures even spacing among heading, mascot, text, CTA. */
+    gap: var(--spacing-md);
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
 }
 
 .hero-heading {
-    margin-bottom: var(--spacing-lg);
     line-height: 1.1;
     color: var(--color-dark);
     font-family: var(--font-display);
@@ -178,11 +184,8 @@ body::after {
 }
 
 .mascot-wrap {
-    margin-bottom: var(--spacing-lg);
-    display: inline-block;
     position: relative;
     transition: transform var(--transition);
-    /* Large bubble around the mascot is formed by ::after */
 }
 
 .mascot-wrap::after {
@@ -221,13 +224,10 @@ body::after {
 
 .hero p {
     font-size: 1.25rem;
-    color: var(--color-dark);
-    margin-bottom: var(--spacing-lg);
     font-weight: 400;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
     line-height: 1.6;
+    color: var(--color-dark);
 }
 
 /* Distortion Animation for hero bubble */
@@ -254,7 +254,7 @@ body::after {
     animation: blobMorph 2s forwards;
 }
 
-/* Buttons */
+/* CTA Button */
 .cta-button {
     font-family: var(--font-display);
     font-weight: 500; 
@@ -393,26 +393,15 @@ footer {
     font-size: 0.875rem;
 }
 
-/* Responsive Adjustments */
+/* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 768px) {
-    .hero {
-        /* Let the hero adapt better on tablets and smaller devices */
-        min-height: auto;
-        padding: var(--spacing-md) var(--spacing-sm);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: var(--spacing-md);
-    }
-
     .hero-heading {
         font-size: 2.5rem;
-        margin-bottom: var(--spacing-md);
     }
 
-    .hero p {
-        font-size: 1.125rem;
-        margin-bottom: var(--spacing-md);
+    .hero-content {
+        gap: var(--spacing-sm);
+        max-width: 600px;
     }
 
     .mascot {
@@ -420,29 +409,37 @@ footer {
         height: 220px;
     }
 
-    .mascot-wrap {
-        margin-bottom: var(--spacing-md);
-    }
     .mascot-wrap::after {
         width: 260px; 
         height: 260px;
     }
 
+    .hero p {
+        font-size: 1.125rem;
+        max-width: 500px;
+    }
+
     .cta-button {
         padding: 0.75rem 1.5rem;
+    }
+
+    section {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    section h2 {
+        font-size: 2rem;
+    }
+
+    section p {
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
     .hero-heading {
         font-size: 2rem;
-        line-height: 1.1;
-        margin-bottom: var(--spacing-sm);
-    }
-
-    .cta-button {
-        width: 100%;
-        padding: 0.75rem 1rem;
+        line-height: 1.2;
     }
 
     .mascot {
@@ -455,12 +452,13 @@ footer {
         height: 240px;
     }
 
-    .hero {
-        gap: var(--spacing-md);
-        padding: var(--spacing-md) var(--spacing-sm);
+    .hero p {
+        font-size: 1rem;
+        max-width: 400px;
     }
 
-    .hero p {
-        margin-bottom: var(--spacing-md);
+    .cta-button {
+        width: 100%;
+        padding: 0.75rem 1rem;
     }
 }

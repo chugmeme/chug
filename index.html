@@ -27,6 +27,7 @@
         </div>
     </div>
     
+    <!-- HERO SECTION - FULL VIEWPORT HEIGHT -->
     <section class="hero">
         <div class="cosmic-canvas">
             <canvas id="cosmosCanvas"></canvas>
@@ -287,22 +288,20 @@
 
         // For collision with the hero bubble
         function getHeroBubbleData() {
-            // The ".mascot-wrap" is the container that has the big bubble
             const rect = mascotWrap.getBoundingClientRect();
             const hx = rect.left + rect.width / 2;
             const hy = rect.top + rect.height / 2;
-            // We'll treat it as a circle that fits exactly inside:
             const hr = Math.min(rect.width, rect.height) / 2;
             return { hx, hy, hr };
         }
 
         function moveChaos(timestamp) {
-            // If accelActive, linearly interpolate from 3 -> 1 over 3 seconds
+            // If accelActive, linearly interpolate from 3 -> 1 over 3s
             if (accelActive) {
                 const elapsed = timestamp - clickTime; 
                 if (elapsed < accelDuration) {
                     const t = elapsed / accelDuration;   
-                    currentSpeedFactor = 3 - 2 * t;       // 3 -> 1 over time
+                    currentSpeedFactor = 3 - 2 * t;       
                 } else {
                     currentSpeedFactor = baseSpeedFactor; 
                     accelActive = false;
@@ -330,21 +329,18 @@
                 cvy = -cvy;
             }
 
-            // ----- Check collision with hero bubble -----
+            // Check collision with hero bubble
             const { hx, hy, hr } = getHeroBubbleData();
-            // Chaos bubble center:
             const ccx = cx + chaosSize / 2;
             const ccy = cy + chaosSize / 2;
-            // Distance between centers
             const dx = ccx - hx;
             const dy = ccy - hy;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            // Sum of radii = chaos bubble radius + hero bubble radius
             const chaosRadius = chaosSize / 2;
             const sumR = chaosRadius + hr;
 
             if (dist < sumR) {
-                // There's a collision: push chaos bubble out + reflect velocity
+                // Collision
                 const overlap = sumR - dist;
                 const nx = dx / dist;
                 const ny = dy / dist;
@@ -353,8 +349,7 @@
                 const dot = cvx * nx + cvy * ny; 
                 cvx = cvx - 2 * dot * nx;
                 cvy = cvy - 2 * dot * ny;
-
-                // Trigger a short 'distort' or 'bubble-distort' animation for both
+                // Distortion
                 chaosMascot.classList.add('bubble-distort');
                 mascotWrap.classList.add('bubble-distort');
                 setTimeout(() => {
@@ -370,7 +365,7 @@
         }
         requestAnimationFrame(moveChaos);
 
-        // On click => triple speed immediately, then gradually return to normal
+        // On click => triple speed
         chaosMascot.addEventListener('click', () => {
             currentSpeedFactor = 3;
             accelActive = true;
