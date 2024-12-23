@@ -151,11 +151,8 @@
     box-shadow: 0 5px 10px rgba(0,0,0,0.5);
   }
   
-  /* 
-     HERO SECTION 
-     EXACT single screen usage, no scroll => 
-     and only the special heading is bigger 
-  */
+  /* HERO: one full screen, no scroll, 
+     heading special, everything else standard */
   .hero {
     width: 100%;
     height: 100vh;
@@ -166,18 +163,22 @@
     align-items: center;
     justify-content: center;
   
-    /* minimal padding to avoid edges but keep everything in view */
     padding: var(--spacing-sm);
     position: relative;
   }
   
+  /* cosmic canvas behind hero content */
   .cosmic-canvas {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
     pointer-events: none;
     z-index: 0;
   }
   
+  /* hero-content: column with normal gap */
   .hero-content {
     z-index: 1;
     display: flex;
@@ -185,25 +186,17 @@
     align-items: center;
     text-align: center;
   
-    /* moderate gap so items are spaced 
-       but not so large it pushes CTA out 
-    */
     gap: var(--spacing-md);
   
     width: 100%;
     max-width: 800px;
   }
   
-  /* 
-     The special hero heading:
-     bigger than normal text system,
-     but only for heading 
-  */
+  /* The special large heading for "This is CHUG" */
   .hero-heading {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.02em;
-    /* large heading for "This is CHUG" */
     font-size: 4.5rem; 
     line-height: 1.1;
     color: var(--color-light);
@@ -225,16 +218,16 @@
     }
   }
   
+  /* smaller sub-line */
   .intro-line {
     display: block;
     font-family: var(--font-primary);
-    /* a bit smaller than main heading but consistent */
     font-size: 1.5rem;
     margin-bottom: 0.2em;
     opacity: 0.9;
   }
   
-  /* The bubble around the mascot is moderate in size */
+  /* Mascot bubble moderate size */
   .mascot-wrap {
     position: relative;
     transition: transform var(--transition);
@@ -264,7 +257,7 @@
     transform: scale(1.04);
   }
   
-  /* Mascot video sized consistently */
+  /* Mascot video also 320x320 */
   .mascot {
     width: 320px; 
     height: 320px;
@@ -275,10 +268,7 @@
     box-shadow: none;
   }
   
-  /* 
-     Hero paragraph + CTA 
-     follow normal system sizes
-  */
+  /* hero paragraph follows normal system (1.125rem) */
   .hero p {
     font-size: 1.125rem;
     line-height: 1.6;
@@ -286,7 +276,7 @@
     color: var(--color-light);
   }
   
-  /* Distortion bubble animation */
+  /* Distortion effect on bubble */
   @keyframes blobMorph {
     0% {
       border-radius: 50%;
@@ -310,7 +300,7 @@
     animation: blobMorph 2s forwards;
   }
   
-  /* CTA Button follows normal system's button styling */
+  /* CTA button follows normal system (1rem) */
   .cta-button {
     font-family: var(--font-display);
     font-size: 1rem;
@@ -334,7 +324,7 @@
     box-shadow: 0 15px 30px rgba(0,0,0,0.6);
   }
   
-  /* Sections below hero follow normal spacing */
+  /* Normal sections below hero */
   section {
     padding: var(--spacing-lg) var(--spacing-md);
   }
@@ -362,7 +352,7 @@
     line-height: 1.6;
   }
   
-  /* Tokenomics grid & items */
+  /* Tokenomics grid/items - same system */
   .tokenomics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -446,5 +436,39 @@
   .footer-content p {
     color: var(--color-light);
     font-size: 0.875rem;
+  }
+  
+  /* 
+     MOBILE ADJUSTMENTS 
+     - reduce .hero p and .cta-button font size
+     - possibly smaller .mascot if needed
+  */
+  @media (max-width: 480px) {
+    /* Keep big heading but maybe scale it a bit down for narrow screens */
+    .hero-heading {
+      font-size: 3.2rem;
+    }
+  
+    /* The hero paragraph: slightly smaller than 1.125rem => 1rem */
+    .hero p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+  
+    /* CTA button smaller text & padding for mobile */
+    .cta-button {
+      font-size: 0.95rem;
+      padding: 0.6rem 1.5rem;
+    }
+  
+    /* Mascot bubble a bit smaller so it doesn't push CTA off screen */
+    .mascot {
+      width: 260px; 
+      height: 260px;
+    }
+    .mascot-wrap::after {
+      width: 260px; 
+      height: 260px;
+    }
   }
   
