@@ -12,10 +12,11 @@
     href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" 
     rel="stylesheet"
   >
-  
-  <!-- External CSS -->
+
+  <!-- Our External CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Infinite background gradient -->
   <div class="infinite-bg"></div>
@@ -62,13 +63,14 @@
       <p>
         At the <em>end of all horizons</em>, where <em>infinite abundance</em> 
         meets <strong>eternal happiness</strong>, <strong>CHUG</strong> arrives 
-        to bestow <em>everything </em> upon you.
+        to bestow <em>everything</em> upon you.
       </p>
       
       <a href="#tokenomics" class="cta-button">CHUG the Universe</a>
     </div>
   </section>
 
+  <!-- ABOUT SECTION -->
   <section id="about" class="fade-section">
     <div class="content-container">
       <h2>Pure Integration</h2>
@@ -80,6 +82,7 @@
     </div>
   </section>
 
+  <!-- TOKENOMICS SECTION -->
   <section id="tokenomics" class="fade-section">
     <div class="content-container">
       <h2>Tokenomics</h2>
@@ -109,6 +112,7 @@
     </div>
   </section>
 
+  <!-- OUR MISSION SECTION -->
   <section id="mission" class="fade-section">
     <div class="content-container">
       <h2>Our Mission</h2>
@@ -120,6 +124,7 @@
     </div>
   </section>
 
+  <!-- COMMUNITY SECTION -->
   <section id="community" class="fade-section">
     <div class="content-container">
       <h2>Join the Eternal Flow</h2>
@@ -128,6 +133,19 @@
         of abundance, culture, and joy fill your life. This is your birthright; embrace it.
       </p>
       <a href="#" class="cta-button community-cta">Drink Infinity Now</a>
+    </div>
+  </section>
+
+  <!-- NEW COIN RANKS SECTION -->
+  <section id="coin-rank" class="fade-section">
+    <div class="content-container">
+      <h2>Obstacles in Orbit: CHUG’s Cosmic Unfolding</h2>
+      <p>
+        Temporary obstacles before the grand expanse that is CHUG. Tilt your gaze if you wish; soon enough, our cosmic wave rolls on, untouched and unbound.
+      </p>
+      <div class="coin-rank-grid" id="coin-rank-container">
+        <!-- Cards will be injected here by JS -->
+      </div>
     </div>
   </section>
 
@@ -153,8 +171,7 @@
   </footer>
 
   <!-- ======================================
-       JS IN THE HTML FOR DEMO: PLEASE SEPARATE 
-       IF YOU PREFER PURE PRODUCTION SEPARATION
+       JS IN THE HTML FOR DEMO
        ======================================= -->
   <script>
     /* ================
@@ -316,8 +333,7 @@
     let currentSpeedFactor = 1;
     let clickTime = 0;
     let accelActive = false;
-    // Last 5 seconds of acceleration
-    const accelDuration = 5000; 
+    const accelDuration = 5000; // 5s of acceleration
 
     function getHeroBubbleData() {
       const rect = mascotWrap.getBoundingClientRect();
@@ -432,6 +448,47 @@
     sections.forEach(section => {
       sectionObserver.observe(section);
     });
-  </script>
+
+    /* ===============================
+       COIN RANK FETCH AND RENDER
+       =============================== */
+       const coinRankContainer = document.getElementById('coin-rank-container');
+  fetch(
+    `https://gist.githubusercontent.com/chugmeme/639de032a2725fd6b4713c529a5e9d11/raw/marketcaps.json?ts=${Date.now()}`, 
+    { cache: 'no-cache' }
+  )
+    .then(response => response.json())
+    .then(data => {
+      // Only want top 12 => first 11 plus last
+      let coins = [...data];
+      if (coins.length > 12) {
+        coins = coins.slice(0, 11).concat(coins[coins.length - 1]);
+      }
+
+      // Render
+      coins.forEach(coin => {
+        // Format marketcap
+        const marketcapFormatted = Intl.NumberFormat('en-US', { 
+          style: 'currency', 
+          currency: 'USD', 
+          maximumFractionDigits: 0 
+        }).format(coin.marketcap);
+
+        const card = document.createElement('div');
+        card.className = 'coin-rank-card';
+        card.innerHTML = `
+          <div class="rank-number">#${coin.rank}</div>
+          <div class="rank-symbol">${coin.symbol}</div>
+          <div class="marketcap">M.Cap: ${marketcapFormatted}</div>
+        `;
+        coinRankContainer.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error('Failed to load coin ranks:', err);
+      coinRankContainer.innerHTML = `<p>Failed to load coin data.</p>`;
+    });
+</script>
+
 </body>
 </html>

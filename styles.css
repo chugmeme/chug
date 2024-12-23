@@ -140,7 +140,6 @@
   }
   
   .nav-hints a {
-    /* Slightly transparent background for style and visibility */
     background: rgba(237,255,252, 0.8);
     color: var(--color-dark);
     padding: var(--spacing-xs) var(--spacing-sm);
@@ -156,8 +155,7 @@
     box-shadow: 0 5px 10px rgba(0,0,0,0.5);
   }
   
-  /* HERO: one full screen, no scroll, 
-     heading special, everything else standard */
+  /* HERO */
   .hero {
     width: 100%;
     height: 100vh;
@@ -170,7 +168,6 @@
     position: relative;
   }
   
-  /* cosmic canvas behind hero content */
   .cosmic-canvas {
     position: absolute;
     top: 0; 
@@ -181,7 +178,6 @@
     z-index: 0;
   }
   
-  /* hero-content: column with normal gap */
   .hero-content {
     z-index: 1;
     display: flex;
@@ -193,7 +189,7 @@
     max-width: 800px;
   }
   
-  /* Animate hero content for a microinteraction */
+  /* Animate hero content */
   .hero-content.fade-in {
     opacity: 0;
     transform: translateY(20px);
@@ -285,7 +281,7 @@
     box-shadow: none;
   }
   
-  /* hero paragraph follows normal system (1.125rem) */
+  /* hero paragraph */
   .hero p {
     font-size: 1.125rem;
     line-height: 1.6;
@@ -293,7 +289,7 @@
     color: var(--color-light);
   }
   
-  /* Distortion effect on bubble, extended to 5s for fluid motion */
+  /* Distortion effect */
   @keyframes blobMorph {
     0% {
       border-radius: 50%;
@@ -321,7 +317,7 @@
     animation: blobMorph 5s ease-in-out forwards;
   }
   
-  /* CTA button follows normal system (1rem) */
+  /* CTA button */
   .cta-button {
     font-family: var(--font-display);
     font-size: 1rem;
@@ -345,7 +341,7 @@
     box-shadow: 0 15px 30px rgba(0,0,0,0.6);
   }
   
-  /* Subtle arrow icon for CTA */
+  /* Subtle arrow icon */
   .cta-button::after {
     content: "→";
     margin-left: 0.5rem;
@@ -384,7 +380,7 @@
     line-height: 1.6;
   }
   
-  /* Fade-in sections on scroll microinteraction */
+  /* Fade-in sections on scroll */
   .fade-section {
     opacity: 0;
     transform: translateY(30px);
@@ -395,7 +391,7 @@
     transform: translateY(0);
   }
   
-  /* Tokenomics grid/items - same system */
+  /* Tokenomics */
   .tokenomics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -444,7 +440,6 @@
     height: 80px;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    /* Slight transparency to visualize a 'bubble' */
     opacity: 0.9;
     background-color: transparent; 
     cursor: pointer;
@@ -466,7 +461,7 @@
     animation: bubbleDistort 0.5s ease-out;
   }
   
-  /* Footer with same cosmic background as page (transparent) */
+  /* Footer */
   footer {
     background: transparent;
     padding: var(--spacing-lg) var(--spacing-md);
@@ -483,14 +478,9 @@
     font-size: 0.875rem;
   }
   
-  /* 
-     MOBILE ADJUSTMENTS 
-     - reduce .hero p and .cta-button font size
-     - possibly smaller .mascot if needed
-  */
+  /* MOBILE ADJUSTMENTS */
   @media (max-width: 480px) {
     .hero {
-      /* Use dynamic viewport height to respect mobile browser UI */
       height: 100dvh;
       overflow: hidden;
     }
@@ -519,3 +509,56 @@
       height: 260px;
     }
   }
+  
+  /* =============================
+     COIN RANK STYLES
+     ============================= */
+  .coin-rank-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    justify-items: center;
+  }
+  
+  .coin-rank-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 280px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform var(--transition), box-shadow var(--transition);
+    cursor: pointer;
+  }
+  
+  .coin-rank-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    background: rgba(151,253,228,0.1);
+  }
+  
+  .coin-rank-card .rank-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-light);
+  }
+  
+  .coin-rank-card .rank-symbol {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-aqua);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .coin-rank-card .marketcap {
+    font-size: 0.95rem;
+    color: var(--color-light);
+    text-align: center;
+    line-height: 1.4;
+  }
+  
