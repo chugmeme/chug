@@ -511,9 +511,9 @@
     }
   }
   
-  /* ===========================================
-     NAME-FOCUSED COIN RANK CARDS (SMALL RANK)
-     =========================================== */
+  /* =============================
+     MINIMALIST COIN RANK STYLES
+     ============================= */
   .coin-rank-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -524,99 +524,68 @@
   
   .coin-rank-card {
     position: relative;
-    backdrop-filter: blur(6px);
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: var(--radius-md);
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
     padding: var(--spacing-md);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: transform var(--transition), 
-                box-shadow var(--transition), 
-                background var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
     cursor: pointer;
     overflow: hidden;
   }
   
   .coin-rank-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 15px 20px rgba(0,0,0,0.6),
-                0 0 20px rgba(97,253,228,0.2),
-                0 0 40px rgba(52,153,140,0.25);
+    box-shadow: 0 15px 20px rgba(0,0,0,0.6);
     background: rgba(151,253,228,0.1);
-  }
-  
-  .coin-rank-card::before {
-    content: "";
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(rgba(151,253,228,0.1), transparent 70%);
-    transition: transform 0.5s ease;
-    pointer-events: none;
-    z-index: -1;
-  }
-  .coin-rank-card:hover::before {
-    transform: translate(-50%, -50%) scale(1);
   }
   
   .card-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-sm);
-    width: 100%;
-    position: relative;
+    justify-content: center;
+  }
+
+  /* 
+    The container for rank & symbol (side by side) 
+    + M.Cap (own line below).
+  */
+  .card-line {
+    display: flex;
+    flex-direction: column; /* We'll stack .top-line + .mcap-line vertically */
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .top-line {
+    display: flex;         /* Keep rank + symbol side-by-side */
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .rank-pill {
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-aqua), var(--color-teal));
+    color: var(--color-dark);
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
   
-  /* Token symbol is bigger & center */
-  .symbol-text {
-    font-size: 1.4rem;
+  .rank-symbol {
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--color-aqua);
   }
   
-  /* M.Cap label + value stacked below symbol */
-  .cap-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-  }
-  
-  .mcap-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: rgba(237,255,252,0.8);
-  }
-  
-  .mcap-value {
-    font-size: 1rem;
-    font-weight: 600;
+  .mcap-line {
+    font-size: 0.9rem;
     color: var(--color-light);
+    opacity: 0.85;
+    text-align: center;
   }
-  
-  /* Smaller rank circle in top-right corner */
-  .corner-rank {
-    position: absolute;
-    top: var(--spacing-xs);
-    right: var(--spacing-xs);
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--color-aqua), var(--color-teal));
-    color: var(--color-dark);
-    padding: 0.2rem 0.6rem;
-    border-radius: 9999px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    white-space: nowrap;
-    cursor: default;
-    user-select: none;
-  }
-  

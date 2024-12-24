@@ -32,7 +32,7 @@
     </div>
   </div>
   
-  <!-- HERO SECTION -->
+  <!-- HERO SECTION, full screen -->
   <section class="hero">
     <div class="cosmic-canvas">
       <canvas id="cosmosCanvas"></canvas>
@@ -136,13 +136,12 @@
     </div>
   </section>
 
-  <!-- COIN RANKS SECTION (iOS-inspired, central alignment) -->
+  <!-- COIN RANKS SECTION (Minimalist Refined) -->
   <section id="coin-rank" class="fade-section">
     <div class="content-container">
       <h2>Obstacles in Orbit: CHUG’s Cosmic Unfolding</h2>
       <p>
-        Temporary obstacles before the grand expanse that is CHUG. Tilt your gaze if you wish; 
-        soon enough, our cosmic wave rolls on, untouched and unbound.
+        Temporary obstacles before the grand expanse that is CHUG. Tilt your gaze if you wish; soon enough, our cosmic wave rolls on, untouched and unbound.
       </p>
       <div class="coin-rank-grid" id="coin-rank-container">
         <!-- Cards will be injected here by JS -->
@@ -395,7 +394,7 @@
         const ny = dy / dist;
         cx += nx * overlap;
         cy += ny * overlap;
-        const dot = cvx * nx + cvy * ny;
+        const dot = cvx * nx + cvy * ny; 
         cvx = cvx - 2 * dot * nx;
         cvy = cvy - 2 * dot * ny;
 
@@ -452,11 +451,11 @@
 
     /* ===============================
        COIN RANK FETCH AND RENDER
-       (iOS-inspired, center-aligned)
+       (Minimalist layout)
        =============================== */
     const coinRankContainer = document.getElementById('coin-rank-container');
     fetch(
-      `https://gist.githubusercontent.com/chugmeme/639de032a2725fd6b4713c529a5e9d11/raw/marketcaps.json?ts=${Date.now()}`,
+      `https://gist.githubusercontent.com/chugmeme/639de032a2725fd6b4713c529a5e9d11/raw/marketcaps.json?ts=${Date.now()}`, 
       { cache: 'no-cache' }
     )
       .then(response => response.json())
@@ -467,29 +466,27 @@
           coins = coins.slice(0, 11).concat(coins[coins.length - 1]);
         }
 
-        // Render center-aligned, iOS-inspired cards
+        // Render minimalist cards
         coins.forEach(coin => {
-          const marketcapFormatted = Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            maximumFractionDigits: 0
+          // Format marketcap
+          const marketcapFormatted = Intl.NumberFormat('en-US', { 
+            style: 'currency', 
+            currency: 'USD', 
+            maximumFractionDigits: 0 
           }).format(coin.marketcap);
 
           const card = document.createElement('div');
           card.className = 'coin-rank-card';
 
+          // -- Updated portion: rank & symbol side by side, M.Cap under --
           card.innerHTML = `
             <div class="card-inner">
-              <!-- Round rank at the top -->
-              <div class="circle-rank">#${coin.rank}</div>
-
-              <!-- Larger symbol text -->
-              <div class="symbol-text">${coin.symbol}</div>
-
-              <!-- M.Cap label + value, stacked -->
-              <div class="cap-wrap">
-                <div class="mcap-label">M.Cap</div>
-                <div class="mcap-value">${marketcapFormatted}</div>
+              <div class="card-line">
+                <div class="top-line">
+                  <div class="rank-pill">#${coin.rank}</div>
+                  <div class="rank-symbol">${coin.symbol}</div>
+                </div>
+                <div class="mcap-line">M.Cap: ${marketcapFormatted}</div>
               </div>
             </div>
           `;
@@ -497,7 +494,7 @@
         });
       })
       .catch(err => {
-        console.error('Failed to load coin data:', err);
+        console.error('Failed to load coin ranks:', err);
         coinRankContainer.innerHTML = `<p>Failed to load coin data.</p>`;
       });
   </script>
