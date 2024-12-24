@@ -32,7 +32,7 @@
     </div>
   </div>
   
-  <!-- HERO SECTION, full screen -->
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="cosmic-canvas">
       <canvas id="cosmosCanvas"></canvas>
@@ -136,12 +136,13 @@
     </div>
   </section>
 
-  <!-- NEW COIN RANKS SECTION -->
+  <!-- COIN RANKS SECTION (iOS-inspired, central alignment) -->
   <section id="coin-rank" class="fade-section">
     <div class="content-container">
       <h2>Obstacles in Orbit: CHUG’s Cosmic Unfolding</h2>
       <p>
-        Temporary obstacles before the grand expanse that is CHUG. Tilt your gaze if you wish; soon enough, our cosmic wave rolls on, untouched and unbound.
+        Temporary obstacles before the grand expanse that is CHUG. Tilt your gaze if you wish; 
+        soon enough, our cosmic wave rolls on, untouched and unbound.
       </p>
       <div class="coin-rank-grid" id="coin-rank-container">
         <!-- Cards will be injected here by JS -->
@@ -345,11 +346,11 @@
 
     function moveChaos(timestamp) {
       if (accelActive) {
-        const elapsed = timestamp - clickTime; 
+        const elapsed = timestamp - clickTime;
         if (elapsed < accelDuration) {
-          const t = elapsed / accelDuration;   
+          const t = elapsed / accelDuration;
           // Gradually slow from speed factor 3 back to 1
-          currentSpeedFactor = 3 - 2 * t;       
+          currentSpeedFactor = 3 - 2 * t;
         } else {
           currentSpeedFactor = baseSpeedFactor;
           accelActive = false;
@@ -394,7 +395,7 @@
         const ny = dy / dist;
         cx += nx * overlap;
         cy += ny * overlap;
-        const dot = cvx * nx + cvy * ny; 
+        const dot = cvx * nx + cvy * ny;
         cvx = cvx - 2 * dot * nx;
         cvy = cvy - 2 * dot * ny;
 
@@ -451,44 +452,54 @@
 
     /* ===============================
        COIN RANK FETCH AND RENDER
+       (iOS-inspired, center-aligned)
        =============================== */
-       const coinRankContainer = document.getElementById('coin-rank-container');
-  fetch(
-    `https://gist.githubusercontent.com/chugmeme/639de032a2725fd6b4713c529a5e9d11/raw/marketcaps.json?ts=${Date.now()}`, 
-    { cache: 'no-cache' }
-  )
-    .then(response => response.json())
-    .then(data => {
-      // Only want top 12 => first 11 plus last
-      let coins = [...data];
-      if (coins.length > 12) {
-        coins = coins.slice(0, 11).concat(coins[coins.length - 1]);
-      }
+    const coinRankContainer = document.getElementById('coin-rank-container');
+    fetch(
+      `https://gist.githubusercontent.com/chugmeme/639de032a2725fd6b4713c529a5e9d11/raw/marketcaps.json?ts=${Date.now()}`,
+      { cache: 'no-cache' }
+    )
+      .then(response => response.json())
+      .then(data => {
+        // Only want top 12 => first 11 plus last
+        let coins = [...data];
+        if (coins.length > 12) {
+          coins = coins.slice(0, 11).concat(coins[coins.length - 1]);
+        }
 
-      // Render
-      coins.forEach(coin => {
-        // Format marketcap
-        const marketcapFormatted = Intl.NumberFormat('en-US', { 
-          style: 'currency', 
-          currency: 'USD', 
-          maximumFractionDigits: 0 
-        }).format(coin.marketcap);
+        // Render center-aligned, iOS-inspired cards
+        coins.forEach(coin => {
+          const marketcapFormatted = Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0
+          }).format(coin.marketcap);
 
-        const card = document.createElement('div');
-        card.className = 'coin-rank-card';
-        card.innerHTML = `
-          <div class="rank-number">#${coin.rank}</div>
-          <div class="rank-symbol">${coin.symbol}</div>
-          <div class="marketcap">M.Cap: ${marketcapFormatted}</div>
-        `;
-        coinRankContainer.appendChild(card);
+          const card = document.createElement('div');
+          card.className = 'coin-rank-card';
+
+          card.innerHTML = `
+            <div class="card-inner">
+              <!-- Round rank at the top -->
+              <div class="circle-rank">#${coin.rank}</div>
+
+              <!-- Larger symbol text -->
+              <div class="symbol-text">${coin.symbol}</div>
+
+              <!-- M.Cap label + value, stacked -->
+              <div class="cap-wrap">
+                <div class="mcap-label">M.Cap</div>
+                <div class="mcap-value">${marketcapFormatted}</div>
+              </div>
+            </div>
+          `;
+          coinRankContainer.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load coin data:', err);
+        coinRankContainer.innerHTML = `<p>Failed to load coin data.</p>`;
       });
-    })
-    .catch(err => {
-      console.error('Failed to load coin ranks:', err);
-      coinRankContainer.innerHTML = `<p>Failed to load coin data.</p>`;
-    });
-</script>
-
+  </script>
 </body>
 </html>
